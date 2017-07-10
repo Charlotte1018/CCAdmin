@@ -1,0 +1,23 @@
+{
+  "name": "express",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node api/app.js",
+    "build": "webpack --config webpack.config.js --progress --watch --colors --display-modules --display-reasons",
+    "dev": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "debug": "~2.6.3",
+    "clean-webpack-plugin": "^0.1.16",
+    "copy-webpack-plugin": "^4.0.1",
+    "babel-loader": "^6.2.10",
+    "json-loader": "^0.5.4",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.29.0",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
+  }
+}
