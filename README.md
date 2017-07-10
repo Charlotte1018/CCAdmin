@@ -3,7 +3,7 @@
 ## install from sourceCode:
 
 * step 1: 
-get code from github: https://github.com/stevenkcolin/acicoadmin
+get code from github: git@github.com:Charlotte1018/CCAdmin.git
 
 * step 2: `npm i` to install node_modules
 
