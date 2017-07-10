@@ -11,7 +11,7 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: './app/views/**/*', to: '' }
+      { from: './app/views/**/*' }
     ]),
     new htmlWebpackPlugin({
       filename: "index.html",
@@ -29,16 +29,6 @@ module.exports = {
       {
         test: /\.css$/,
         loader: "style-loader!css-loader"
-      },
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        include: path.resolve("app"),
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015'],
-          plugins: ['transform-runtime']
-        }
       },
       {
         test: /\.(png|jpg|gif|svg|eot|woff2|woff|ttf)$/i,
