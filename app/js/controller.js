@@ -110,5 +110,6 @@ angular.module('controllerModule', [])
         })
     })
     .controller('articleEditor', function ($scope) {
-
+        $scope.htmlContent = "<p>Hello World!</p>";
+        $scope.newHtmlContent = '';
     })
