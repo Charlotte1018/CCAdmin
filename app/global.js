@@ -1,1 +1,2 @@
 taTools = {};
+rangy ="";
