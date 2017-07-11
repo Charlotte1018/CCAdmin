@@ -25,6 +25,7 @@
     "angular-bootstrap": "^2.5.0",
     "font-awesome": "^4.7.0",
     "angular-translate": "^2.15.2",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "textAngular": "^1.5.16"
   }
 }

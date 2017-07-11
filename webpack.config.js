@@ -28,7 +28,7 @@ module.exports = {
       { test: /\.json$/, use: 'json-loader' },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader"
+        loader: "style-loader!css-loader!postcss-loader"
       },
       {
         test: /\.(png|jpg|gif|svg|eot|woff2|woff|ttf)$/i,
