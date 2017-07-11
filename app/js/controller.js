@@ -109,4 +109,6 @@ angular.module('controllerModule', [])
             $scope.eventList = result.data;
         })
     })
+    .controller('articleEditor', function ($scope) {
 
+    })

@@ -89,6 +89,15 @@ angular.module('routerModule', [
                     }
                 }
             })
+            .state('CCAdmin.articleEditor', {
+                url: '/articleEditor',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/articles/article.html',
+                        controller: 'articleEditor'
+                    }
+                }
+            })
             
             
             
