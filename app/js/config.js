@@ -4,7 +4,8 @@ angular
         'ui.bootstrap',
         'pascalprecht.translate',
         'directiveModule',
-        'routerModule'
+        'routerModule',
+        'textAngular'
     ])
     .config(function ($urlRouterProvider) {
         $urlRouterProvider.when("/", "CCAdmin/home");
