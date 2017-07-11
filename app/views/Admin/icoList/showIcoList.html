@@ -1,0 +1,59 @@
+
+    <section class="profile-nav alt green-border ">
+        <section class="wrapper ">
+            <!-- page start-->
+            <div class="row col-lg-10 col-lg-offset-1">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <h4>Show IcoList</h4>
+                        </header>
+                        <div class="panel-body">
+                            <form class="form-horizontal" id="default">
+                                <fieldset>
+                                    <div><br><br>
+
+                                        <table class="table table-striped border-top">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:8px;"><input type="checkbox" class="group-checkable" /></th>
+                                                    <th>id</th>
+                                                    <th>logoPath</th>
+                                                    <th>icoName</th>
+                                                    <th>status</th>
+                                                    <th>isRecommended</th>
+                                                    <th >startDate</th>
+                                                    <th>endDate</th>
+                                                    <th>description</th>
+                                                    <th>lastModifyDate</th>
+                                                    <th>lastModifyUser</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="odd gradeX" ng-repeat="x in icoLists" render-finish>
+                                                    <td><input type="checkbox" class="checkboxes" value="1" /></td>
+                                                    <td>{{x.id}}</td>
+                                                    <td>{{x.logoPath}}</td>
+                                                    <td>{{x.icoName}}</td>
+                                                    <td>{{x.status}}</td>
+                                                    <td>{{x.isRecommended}}</td>
+                                                    <td>{{x.startDate}}</td>
+                                                    <td>{{x.endDate}}</td>
+                                                    <td>{{x.description}}</td>
+                                                    <td>{{x.lastModifyDate}}</td>
+                                                    <td>{{x.lastModifyUser}}</td>
+                                                    <!--<td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
+                                                    </tr>-->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>

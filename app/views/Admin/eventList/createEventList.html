@@ -1,0 +1,63 @@
+<section class="profile-nav alt green-border ">
+    <section class="wrapper ">
+        <div>
+            <section class="panel col-lg-10 col-lg-offset-1">
+                <header class="panel-heading">
+                    <h4>Create EventList</h4>
+                </header><br>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">eventName</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="eventName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">eventDate</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="eventDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">eventLocation</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="eventLocation">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">eventURL</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="eventURL">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">lastModifyDate</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="lastModifyDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">lastModifyUser</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="lastModifyUser">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-danger" ng-click="createEventList()">Create </button>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                                <label class="col-lg-2 control-label">Select:</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" ng-model="seclect" ng-options="x for x in host" ng-change="host()"></select>
+                                </div>
+                            </div>-->
+
+                    </form>
+                </div>
+            </section>
+        </div>
+    </section>
+</section>

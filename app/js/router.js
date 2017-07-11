@@ -17,6 +17,78 @@ angular.module('routerModule', [
                     }
                 }
             })
+            .state('CCAdmin.createBanner', {
+                url: '/createBanner',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/banner/createBanner.html',
+                        controller: 'bannerCtrl'
+                    }
+                }
+            })
+            .state('CCAdmin.showBanner', {
+                url: '/showBanner',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/banner/show.html',
+                        controller: 'bannerCtrl'
+                    }
+                }
+            })
+            .state('CCAdmin.createIcoList', {
+                url: '/createIcoList',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/icoList/createIcoList.html',
+                        controller: 'icoListCtrl'
+                    }
+                }
+            })
+            .state('CCAdmin.showIcoList', {
+                url: '/showIcoList',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/icoList/showIcoList.html',
+                        controller: 'icoListCtrl'
+                    }
+                }
+            })
+            .state('CCAdmin.createIcoDetails', {
+                url: '/createIcoDetails',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/icoDetails/createIcoDetails.html',
+                        controller: 'icoDetailCtrl'
+                    }
+                }
+            })
+            .state('CCAdmin.showIcoDetails', {
+                url: '/showIcoDetails',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/icoDetails/showIcoDetails.html',
+                        controller: 'icoDetailCtrl'
+                    }
+                }
+            })
+            .state('CCAdmin.createEventList', {
+                url: '/createEventList',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/eventList/createEventList.html',
+                        controller: 'eventListCtrl'
+                    }
+                }
+            })
+            .state('CCAdmin.showEventList', {
+                url: '/showEventList',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/eventList/showEventList.html',
+                        controller: 'eventListCtrl'
+                    }
+                }
+            })
             
             
             

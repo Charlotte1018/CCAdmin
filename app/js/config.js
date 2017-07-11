@@ -7,6 +7,6 @@ angular
         'routerModule'
     ])
     .config(function ($urlRouterProvider) {
-        $urlRouterProvider.when("/", "CCAdmin");
-        $urlRouterProvider.otherwise('CCAdmin');
+        $urlRouterProvider.when("/", "CCAdmin/home");
+        $urlRouterProvider.otherwise('CCAdmin/home');
     });
