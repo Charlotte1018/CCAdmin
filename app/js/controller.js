@@ -109,13 +109,6 @@ angular.module('controllerModule', [])
             $scope.eventList = result.data;
         })
     })
-    // .controller('articleEditor', function ($scope,textAngularManager) {
-    //     $scope.htmlContent = "<p>Hello World!</p>";
-    //     $scope.newHtmlContent = '';
-    // })
     .controller('articleEditor', ['$scope', 'textAngularManager', function articleEditor($scope, textAngularManager) {
-            $scope.version = textAngularManager.getVersion();
-            $scope.versionNumber = $scope.version.substring(1);
-            $scope.htmlcontent = "<p>Hello World!</p>";
-            $scope.disabled = false;
-        }]);
+        $scope.htmlcontent = "<p>在此编辑你的文章!</p>";
+    }]);

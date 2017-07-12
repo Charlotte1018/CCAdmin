@@ -16,7 +16,7 @@ module.exports = {
     new htmlWebpackPlugin({
       filename: "index.html",
       template: "index.html",
-      inject: false,
+      inject: 'head',
       minify: {
         removeComments: true,
         collapseWhitespace: true
