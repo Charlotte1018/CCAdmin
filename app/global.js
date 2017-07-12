@@ -1,2 +1,0 @@
-taTools = {};
-rangy ="";
