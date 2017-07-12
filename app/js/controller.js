@@ -109,6 +109,21 @@ angular.module('controllerModule', [])
             $scope.eventList = result.data;
         })
     })
-    .controller('articleEditor', ['$scope', 'textAngularManager', function articleEditor($scope, textAngularManager) {
+    .controller('articleEditor', ['$scope', 'textAngularManager', function articleEditor($scope, textAngularManager,$http) {
         $scope.htmlcontent = "<p>在此编辑你的文章!</p>";
+        $scope.createArticle = function () {
+            $scope.params = [
+                {
+                    "title": $scope.title,
+                    "author": $scope.author,
+                    "time": $scope.time,
+                    "htmlcontent": $scope.htmlcontent,
+                    "lastModifyDate": $scope.lastModifyDate,
+                    "lastModifyUser": $scope.lastModifyUser
+                }
+            ]
+            $http.post($rootScope.Host + "/eventListApi/create", $scope.params).then(function (result) {
+                console.log(result);
+            })
+        }
     }]);
