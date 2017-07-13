@@ -8,6 +8,11 @@ angular.module('routerModule', [
                 templateUrl: "app/views/main.html",
                 controller: "mainCtrl"
             })
+            .state("login", {
+                url: "/login",
+                templateUrl: "app/views/Admin/login.html",
+                controller: "loginCtrl"
+            })
             .state('CCAdmin.home', {
                 url: '/home',
                 views: {

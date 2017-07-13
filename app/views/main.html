@@ -1,5 +1,18 @@
 <header class="header white-bg">
-    <a class="logo"><i class="fa fa-navicon"></i> &nbsp;CC&nbsp;<span>Admin</span></a>
+    <a class="logo"><i class="fa fa-navicon"></i> 码以科技&nbsp;CC&nbsp;<span>Admin</span></a>
+    <div class="top-nav ">
+        <div class="btn-group nav pull-right top-menu" uib-dropdown is-open="status.isopen">
+            <button id="single-button dropdown-toggle" type="button" class="btn btn-danger" ui-sref="login" uib-dropdown-toggle ng-disabled="disabled">
+        退出 
+      </button>
+            <!-- <ul class="dropdown-menu extended logout" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a ng-click="changeLanguage('zh')"><i class=" fa fa-suitcase"></i>简体中文</a></li>
+                <li role="menuitem"><a ng-click="changeLanguage('en')"><i class=" fa fa-language"></i> English</a></li>
+                <li role="menuitem"><a ng-click="changeLanguage('ja')"><i class=" fa fa-bell"></i>Japanese</a></li>
+                <li><a ui-sref="Login"><i class="fa fa-key"></i>退出</a></li>
+            </ul> -->
+        </div>
+    </div>
 </header>
 
 <aside id="sidebar" class="nav-collapse" toggle-menu>

@@ -8,6 +8,6 @@ angular
         'textAngular'
     ])
     .config(function ($urlRouterProvider) {
-        $urlRouterProvider.when("/", "CCAdmin/home");
-        $urlRouterProvider.otherwise('CCAdmin/home');
+        $urlRouterProvider.when("/", "login");
+        $urlRouterProvider.otherwise('login');
     });

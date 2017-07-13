@@ -13,7 +13,7 @@
                                 <fieldset>
                                     <div><br><br>
 
-                                        <table class="table table-striped border-top">
+                                        <table class="table table-striped border-top col-sm-12">
                                             <thead>
                                                 <tr>
                                                     <th style="width:8px;"><input type="checkbox" class="group-checkable" /></th>
@@ -25,24 +25,30 @@
                                                     <th >startDate</th>
                                                     <th>endDate</th>
                                                     <th>description</th>
-                                                    <th>lastModifyDate</th>
-                                                    <th>lastModifyUser</th>
+                                                    <th >edit</th>
+                                                    <th>save</th>
+                                                    <th>delete</th>
+                                                    <!-- <th>lastModifyDate</th>
+                                                    <th>lastModifyUser</th> -->
 
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="odd gradeX" ng-repeat="x in icoLists" render-finish>
                                                     <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                                    <td>{{x.id}}</td>
-                                                    <td>{{x.logoPath}}</td>
-                                                    <td>{{x.icoName}}</td>
-                                                    <td>{{x.status}}</td>
-                                                    <td>{{x.isRecommended}}</td>
-                                                    <td>{{x.startDate}}</td>
-                                                    <td>{{x.endDate}}</td>
-                                                    <td>{{x.description}}</td>
-                                                    <td>{{x.lastModifyDate}}</td>
-                                                    <td>{{x.lastModifyUser}}</td>
+                                                    <td contenteditable="{{edit}}">{{x.id}}</td>
+                                                    <td contenteditable="{{edit}}">{{x.logoPath}}</td>
+                                                    <td contenteditable="{{edit}}">{{x.icoName}}</td>
+                                                    <td contenteditable="{{edit}}">{{x.status}}</td>
+                                                    <td contenteditable="{{edit}}">{{x.isRecommended}}</td>
+                                                    <td contenteditable="{{edit}}">{{x.startDate}}</td>
+                                                    <td contenteditable="{{edit}}">{{x.endDate}}</td>
+                                                    <td contenteditable="{{edit}}">{{x.description}}</td>
+                                                    <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor()">编辑</button></td>
+                                                    <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save()">保存</button></td>
+                                                    <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="">删除</button></td>
+                                                    <!-- <td>{{x.lastModifyDate}}</td>
+                                                    <td>{{x.lastModifyUser}}</td> -->
                                                     <!--<td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
                                                     </tr>-->
                                             </tbody>

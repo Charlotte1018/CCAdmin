@@ -26,6 +26,7 @@
     "font-awesome": "^4.7.0",
     "angular-translate": "^2.15.2",
     "bootstrap": "^3.3.7",
-    "textAngular": "^1.5.16"
+    "textAngular": "^1.5.16",
+    "angular-datepicker": "^2.0.3"
   }
 }
