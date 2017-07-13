@@ -1,5 +1,6 @@
 angular.module('controllerModule', [])
     .controller('mainCtrl', function ($translate, $scope, $http, $rootScope, $state) {
+        $rootScope.lastModifyUser="user1";
     })
     .controller('loginCtrl', function ($scope, $http, $rootScope, $state) {
         $scope.username = "user1";
@@ -8,7 +9,7 @@ angular.module('controllerModule', [])
             "name": $scope.username,
             "password": $scope.password
         };
-
+        $rootScope.lastModifyUser = $scope.username;
         // console.log($scope.username);
         // console.log($scope.password);
         $scope.login = function () {
@@ -16,7 +17,7 @@ angular.module('controllerModule', [])
                 //console.log(result.data);
                 //alert("hello");
                 if (result) {
-                    console.log($scope.username);
+                    console.log($rootScope.lastModifyUser);
                     console.log($scope.password);
                     console.log(result.data);
                     $state.go("CCAdmin.home");
@@ -39,13 +40,14 @@ angular.module('controllerModule', [])
     })
     .controller('bannerCtrl', function ($translate, $scope, $rootScope, $http) {
         $scope.banners = [];
+        $scope.lastModifyDate = new Date().toUTCString();
         $scope.createBanner = function () {
             $scope.params = [
                 {
                     "name": $scope.name,
                     "path": $scope.path,
                     "location": $scope.location,
-                    "status": $scope.status,
+                    "status": $scope.statuss,
                     "startDate": $scope.startDate,
                     "endDate": $scope.endDate,
                     "lastModifyDate": $scope.lastModifyDate,
@@ -59,11 +61,107 @@ angular.module('controllerModule', [])
         $http.get("http://106.15.62.222:3001" + "/bannerApi").then(function (result) {
             $scope.banners = result.data;
         })
+
+
+        //datePicker
+        $scope.today = function () {
+            $scope.startDate = new Date();
+            $scope.endDate = new Date();
+        };
+        $scope.today();
+
+        $scope.clear = function () {
+            $scope.startDate = null;
+            $scope.endDate = null;
+        };
+
+        $scope.inlineOptions = {
+            customClass: getDayClass,
+            minDate: new Date(),
+            showWeeks: true
+        };
+
+        $scope.dateOptions = {
+            //dateDisabled: disabled,
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
+        };
+
+        // Disable weekend selection
+        function disabled(data) {
+            var date = data.date,
+                mode = data.mode;
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        }
+
+        $scope.toggleMin = function () {
+            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+        };
+
+        $scope.toggleMin();
+
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.setDate = function (year, month, day) {
+            $scope.dt = new Date(year, month, day);
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+        $scope.altInputFormats = ['M!/d!/yyyy'];
+
+        $scope.popup1 = {
+            opened: false
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var afterTomorrow = new Date();
+        afterTomorrow.setDate(tomorrow.getDate() + 1);
+        $scope.events = [
+            {
+                date: tomorrow,
+                status: 'full'
+            },
+            {
+                date: afterTomorrow,
+                status: 'partially'
+            }
+        ];
+
+        function getDayClass(data) {
+            var date = data.date,
+                mode = data.mode;
+            if (mode === 'day') {
+                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                    if (dayToCheck === currentDay) {
+                        return $scope.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        }
     })
     .controller('icoListCtrl', function ($translate, $state, $rootScope, $scope, $http) {
-        $scope.lastModifyDate = new Date();
-        // $scope.icoLists = [];
-        $scope.username="xue";
+        $scope.lastModifyDate = new Date().toUTCString();
         $scope.createIcoList = function () {
             if (confirm("您是否确定提交本页？")) {
                 alert("提交并填写详情页");
@@ -93,9 +191,9 @@ angular.module('controllerModule', [])
         $http.get("http://106.15.62.222:3001" + "/icoListApi").then(function (result) {
             $scope.icoLists = result.data;
             return $scope.icoLists;
-        }).then(function save(icoLists){
-            $scope.ico=icoLists;
-            $scope.edit = false; 
+        }).then(function save(icoLists) {
+            $scope.ico = icoLists;
+            $scope.edit = false;
             //console.log($scope.edit);
             //console.log($scope.ico[0]);
         })
@@ -111,12 +209,12 @@ angular.module('controllerModule', [])
         $scope.edit = false;
         $scope.editor = function () { $scope.edit = true; }
         $scope.save = function () {
-             $scope.edit = false;
-             $http.post("http://106.15.62.222:3001" + "/icoListApi/update/1", $scope.icoLists[0]).then(function (result) {
-                    // $scope.banners.push = $scope.params;
-                    console.log(result);
-                })
-         }
+            $scope.edit = false;
+            $http.post("http://106.15.62.222:3001" + "/icoListApi/update/1", $scope.icoLists[0]).then(function (result) {
+                // $scope.banners.push = $scope.params;
+                console.log(result);
+            })
+        }
 
         //分页
         // $scope.totalItems = 64;
@@ -129,7 +227,7 @@ angular.module('controllerModule', [])
         $scope.maxSize = 10;
         $scope.bigTotalItems = 300;
         $scope.bigCurrentPage = 1;
-        $scope.numPages=70;
+        $scope.numPages = 70;
 
 
 
@@ -261,6 +359,7 @@ angular.module('controllerModule', [])
     })
     .controller('eventListCtrl', function ($translate, $scope, $rootScope, $http) {
         $scope.eventList = [];
+        $scope.lastModifyDate = new Date().toUTCString();
         $scope.createEventList = function () {
             $scope.params = [
                 {
@@ -280,6 +379,104 @@ angular.module('controllerModule', [])
         $http.get("http://106.15.62.222:3001" + "/eventListApi").then(function (result) {
             $scope.eventList = result.data;
         })
+
+
+        //datePicker
+        $scope.today = function () {
+            $scope.startDate = new Date();
+            $scope.endDate = new Date();
+        };
+        $scope.today();
+
+        $scope.clear = function () {
+            $scope.startDate = null;
+            $scope.endDate = null;
+        };
+
+        $scope.inlineOptions = {
+            customClass: getDayClass,
+            minDate: new Date(),
+            showWeeks: true
+        };
+
+        $scope.dateOptions = {
+            //dateDisabled: disabled,
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
+        };
+
+        // Disable weekend selection
+        function disabled(data) {
+            var date = data.date,
+                mode = data.mode;
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        }
+
+        $scope.toggleMin = function () {
+            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+        };
+
+        $scope.toggleMin();
+
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.setDate = function (year, month, day) {
+            $scope.dt = new Date(year, month, day);
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+        $scope.altInputFormats = ['M!/d!/yyyy'];
+
+        $scope.popup1 = {
+            opened: false
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var afterTomorrow = new Date();
+        afterTomorrow.setDate(tomorrow.getDate() + 1);
+        $scope.events = [
+            {
+                date: tomorrow,
+                status: 'full'
+            },
+            {
+                date: afterTomorrow,
+                status: 'partially'
+            }
+        ];
+
+        function getDayClass(data) {
+            var date = data.date,
+                mode = data.mode;
+            if (mode === 'day') {
+                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                    if (dayToCheck === currentDay) {
+                        return $scope.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        }
     })
     .controller('articleEditor', ['$scope', 'textAngularManager', function articleEditor($scope, textAngularManager, $http) {
         $scope.htmlcontent = "<p>在此编辑你的文章!</p>";

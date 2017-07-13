@@ -21,8 +21,11 @@
                                                 <th>eventDate</th>
                                                 <th>eventLocation</th>
                                                 <th>eventURL</th>
-                                                <th>lastModifyDate</th>
-                                                <th>lastModifyUser</th>
+                                                <th>edit</th>
+                                                <th>save</th>
+                                                <th>delete</th>
+                                                <!-- <th>lastModifyDate</th>
+                                                <th>lastModifyUser</th> -->
 
                                             </tr>
                                         </thead>
@@ -34,8 +37,11 @@
                                                 <td>{{x.eventDate}}</td>
                                                 <td>{{x.eventLocation}}</td>
                                                 <td>{{x.eventURL}}</td>
-                                                <td>{{x.lastModifyDate}}</td>
-                                                <td>{{x.lastModifyUser}}</td>
+                                                <!-- <td>{{x.lastModifyDate}}</td>
+                                                <td>{{x.lastModifyUser}}</td> -->
+                                                <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor()">编辑</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save()">保存</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="">删除</button></td>
                                                 <!--<td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
                                                     </tr>-->
                                         </tbody>

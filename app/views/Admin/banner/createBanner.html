@@ -10,7 +10,7 @@
                         <div class="form-group">
                             <label for="inputPassword1" class="col-lg-2 control-label">name</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="name">
+                                <input type="text" class="form-control" ng-model="name" placeholder="name">
                             </div>
                         </div>
                         <div class="form-group">
@@ -22,25 +22,39 @@
                         <div class="form-group">
                             <label for="inputPassword1" class="col-lg-2 control-label">location</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="location">
+                                <input type="text" class="form-control" ng-model="location" placeholder="0: top 1; 1:top2; 2:bottom;">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword1" class="col-lg-2 control-label">status</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="status">
+                                <input type="text" class="form-control" ng-model="statuss" placeholder="0: offline; 1: online">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword1" class="col-lg-2 control-label">startDate</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="startDate">
+                                <!-- <input type="text" class="form-control" ng-model="startDate"> -->
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptions"
+                                        ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-success" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword1" class="col-lg-2 control-label">endDate</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="endDate">
+                                <!-- <input type="text" class="form-control" ng-model="endDate"> -->
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptions"
+                                        ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-success" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
                             </div>
                         </div>
                         <div class="form-group">
