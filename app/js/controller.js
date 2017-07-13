@@ -62,7 +62,8 @@ angular.module('controllerModule', [])
     })
     .controller('icoListCtrl', function ($translate, $state, $rootScope, $scope, $http) {
         $scope.lastModifyDate = new Date();
-        $scope.icoLists = [];
+        // $scope.icoLists = [];
+        $scope.username="xue";
         $scope.createIcoList = function () {
             if (confirm("您是否确定提交本页？")) {
                 alert("提交并填写详情页");
@@ -91,10 +92,14 @@ angular.module('controllerModule', [])
         }
         $http.get("http://106.15.62.222:3001" + "/icoListApi").then(function (result) {
             $scope.icoLists = result.data;
-
-            //console.log($scope.icoLists);
             return $scope.icoLists;
+        }).then(function save(icoLists){
+            $scope.ico=icoLists;
+            $scope.edit = false; 
+            //console.log($scope.edit);
+            //console.log($scope.ico[0]);
         })
+        // console.log($rootScope.icoList+"hello");
         // httpPromise.then(
         //     // function save(icoLists) {
         //     //     $scope.edit = false;
@@ -105,7 +110,29 @@ angular.module('controllerModule', [])
         //console.log($scope.icoLists);
         $scope.edit = false;
         $scope.editor = function () { $scope.edit = true; }
-        $scope.save = function () { $scope.edit = false; }
+        $scope.save = function () {
+             $scope.edit = false;
+             $http.post("http://106.15.62.222:3001" + "/icoListApi/update/1", $scope.icoLists[0]).then(function (result) {
+                    // $scope.banners.push = $scope.params;
+                    console.log(result);
+                })
+         }
+
+        //分页
+        // $scope.totalItems = 64;
+        // $scope.currentPage = 4;
+
+        // $scope.pageChanged = function () {
+        //     $log.log('Page changed to: ' + $scope.currentPage);
+        // };
+
+        $scope.maxSize = 10;
+        $scope.bigTotalItems = 300;
+        $scope.bigCurrentPage = 1;
+        $scope.numPages=70;
+
+
+
 
 
         //datePicker

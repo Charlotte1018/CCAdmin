@@ -1,0 +1,115 @@
+<section class="profile-nav alt green-border ">
+    <section class="wrapper ">
+        <div>
+            <section class="panel col-lg-10 col-lg-offset-1">
+                <header class="panel-heading">
+                    <h4>Create IcoList</h4>
+                </header><br>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">logoPath</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="logoPath">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">icoName</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="icoName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">status</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="status">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">isRecommended</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="isRecommended">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">startDate</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="startDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">endDate</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="endDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">description</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="description">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">lastModifyDate</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="lastModifyDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 control-label">lastModifyUser</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="lastModifyUser">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-danger" ng-click="createIcoList()">Create </button>
+                            </div>
+                        </div> -->
+
+                        <div class="row">
+
+                            <h4>Popup</h4>
+                            <div class="row">
+                                
+
+                                <div class="col-md-6">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup ng-model="startDate" is-open="popup2.opened" datepicker-options="dateOptions"
+                                            popup-placement="top-right"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate" is-open="popup1.opened" datepicker-options="dateOptions"
+                                            popup-placement="top-right"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-danger" ui-sref="CCAdmin.createIcoDetails">下一步 </button>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                                <label class="col-lg-2 control-label">Select:</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" ng-model="seclect" ng-options="x for x in host" ng-change="host()"></select>
+                                </div>
+                            </div>-->
+
+                    </form>
+                </div>
+            </section>
+        </div>
+    </section>
+</section>

@@ -1,65 +1,80 @@
+<section class="profile-nav alt green-border ">
+    <section class="wrapper ">
+        <!-- page start-->
+        <div class="row col-xl-12">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h4>Show IcoList</h4>
+                    </header>
+                    <div class="panel-body">
+                        <form class="form-horizontal" id="default">
+                            <fieldset>
+                                <div><br><br>
 
-    <section class="profile-nav alt green-border ">
-        <section class="wrapper ">
-            <!-- page start-->
-            <div class="row col-xl-12">
-                <div class="col-lg-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            <h4>Show IcoList</h4>
-                        </header>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="default">
-                                <fieldset>
-                                    <div><br><br>
-
-                                        <table class="table table-striped border-top col-sm-12">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:8px;"><input type="checkbox" class="group-checkable" /></th>
-                                                    <th>id</th>
-                                                    <th>logoPath</th>
-                                                    <th>icoName</th>
-                                                    <th>status</th>
-                                                    <th>isRecommended</th>
-                                                    <th >startDate</th>
-                                                    <th>endDate</th>
-                                                    <th>description</th>
-                                                    <th >edit</th>
-                                                    <th>save</th>
-                                                    <th>delete</th>
-                                                    <!-- <th>lastModifyDate</th>
+                                    <table class="table table-striped border-top col-sm-12">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:8px;"><input type="checkbox" class="group-checkable" /></th>
+                                                <th>id</th>
+                                                <th>logoPath</th>
+                                                <th>icoName</th>
+                                                <th>status</th>
+                                                <th>isRecommended</th>
+                                                <th>startDate</th>
+                                                <th>endDate</th>
+                                                <th>description</th>
+                                                <th>edit</th>
+                                                <th>save</th>
+                                                <th>delete</th>
+                                                <!-- <th>lastModifyDate</th>
                                                     <th>lastModifyUser</th> -->
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="odd gradeX" ng-repeat="x in icoLists" render-finish>
-                                                    <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                                    <td contenteditable="{{edit}}">{{x.id}}</td>
-                                                    <td contenteditable="{{edit}}">{{x.logoPath}}</td>
-                                                    <td contenteditable="{{edit}}">{{x.icoName}}</td>
-                                                    <td contenteditable="{{edit}}">{{x.status}}</td>
-                                                    <td contenteditable="{{edit}}">{{x.isRecommended}}</td>
-                                                    <td contenteditable="{{edit}}">{{x.startDate}}</td>
-                                                    <td contenteditable="{{edit}}">{{x.endDate}}</td>
-                                                    <td contenteditable="{{edit}}">{{x.description}}</td>
-                                                    <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor()">编辑</button></td>
-                                                    <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save()">保存</button></td>
-                                                    <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="">删除</button></td>
-                                                    <!-- <td>{{x.lastModifyDate}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd gradeX" ng-repeat="x in icoLists" render-finish>
+                                                <td><input type="checkbox" class="checkboxes" value="1" /></td>
+                                                <td contenteditable="{{edit}}">{{x.id}} </td>
+                                                <!-- <input type="text" ng-model="{{x.id}}"> -->
+                                                <td contenteditable="{{edit}}">{{x.logoPath}}</td>
+                                                <td contenteditable="{{edit}}">{{x.icoName}}</td>
+                                                <td contenteditable="{{edit}}">{{x.status}}</td>
+                                                <td contenteditable="{{edit}}">{{x.isRecommended}}</td>
+                                                <td contenteditable="{{edit}}">{{x.startDate}}</td>
+                                                <td contenteditable="{{edit}}">{{x.endDate}}</td>
+                                                <td contenteditable="{{edit}}">{{x.description}}</td>
+                                                <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor()">编辑</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save()">保存</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="">删除</button></td>
+                                                <!-- <td>{{x.lastModifyDate}}</td>
                                                     <td>{{x.lastModifyUser}}</td> -->
-                                                    <!--<td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
+                                                <!--<td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
                                                     </tr>-->
-                                            </tbody>
-                                        </table>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <ul uib-pagination total-items="bigTotalItems" first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页" ng-model="bigCurrentPage"
+                                            max-size="maxSize" class="pagination" boundary-links="true" force-ellipses="true"></ul>
+                                        <!-- <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre> -->
+
                                     </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </section>
-                </div>
+                                </div>
+                                <!-- <div class="row col-sm-offset-4">
+                                    <ul uib-pagination total-items="bigTotalItems" first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-links="true"
+                                        force-ellipses="true"></ul>
+                                     <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre> 
+                                      <ul uib-pagination class="pagination" total-items="totalItems" ng-model="bigCurrentPage" items-per-page="pageSize" ng-click="PageSelect(currentPage)" 
+      num-pages="numPages" max-size="maxSize" previous-text="上一页" next-text="下一页" boundary-link-numbers="true"></ul> 
+                                </div> -->
+                            </fieldset>
+                        </form>
+                    </div>
+                </section>
+                <input contenteditable="true" ng-model="username">{{username}}</input>
+                <pre ng-bind="username">{{username}}</pre>
             </div>
-            <!-- page end-->
-        </section>
+        </div>
+        <!-- page end-->
     </section>
+</section>
