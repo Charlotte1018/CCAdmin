@@ -1,31 +1,22 @@
 angular.module('controllerModule', [])
     .controller('mainCtrl', function ($translate, $scope, $http, $rootScope, $state) {
-        $rootScope.lastModifyUser="user1";
+        //$rootScope.lastModifyUser = username;
     })
     .controller('loginCtrl', function ($scope, $http, $rootScope, $state) {
-        $scope.username = "user1";
-        $scope.password = "abc123";
-        $scope.params = {
-            "name": $scope.username,
-            "password": $scope.password
-        };
         $rootScope.lastModifyUser = $scope.username;
-        // console.log($scope.username);
-        // console.log($scope.password);
         $scope.login = function () {
+            $scope.params = {
+                "name": $scope.username,
+                "password": $scope.password
+            };
             $http.post("http://106.15.62.222:3001" + "/userApi/login", $scope.params).then(function (result) {
-                //console.log(result.data);
-                //alert("hello");
                 if (result) {
-                    console.log($rootScope.lastModifyUser);
-                    console.log($scope.password);
                     console.log(result.data);
                     $state.go("CCAdmin.home");
                 } else {
                     alert("您输入的用户名或密码有误！")
                 }
             })
-
         }
     })
     .controller('homeCtrl', function ($translate, $scope, $rootScope) {
@@ -58,10 +49,38 @@ angular.module('controllerModule', [])
                 console.log(result);
             })
         }
+        // 更新，编辑，删除
+        $scope.edits = []; //控制编辑状态
+        //获取数据
         $http.get("http://106.15.62.222:3001" + "/bannerApi").then(function (result) {
             $scope.banners = result.data;
         })
+        //编辑
+        $scope.editor = function (index) {
+            $scope.edits = [];
+            $scope.edits[index] = true;
+        }
+        //保存
+        $scope.save = function (index) {
+            $scope.edits = [];
+            $scope.index = index + 1;
+            console.log($scope.index);
+            //console.log($scope.icoLists[index]) //制定项
+            $http.post("http://106.15.62.222:3001" + "/bannerApi/update/" + $scope.index, $scope.banners[index]).then(function (result) {
+                console.log(result.data);
+                alert("修改成功！")
+            })
+        }
+        //删除
+        $scope.delete = function (index) {
+            $scope.banners.splice(index, 1)
+        }
 
+        //分页
+        $scope.maxSize = 10;
+        $scope.bigTotalItems = 300;
+        $scope.bigCurrentPage = 1;
+        $scope.numPages = 70;
 
         //datePicker
         $scope.today = function () {
@@ -188,33 +207,35 @@ angular.module('controllerModule', [])
                 alert("重新检查信息");
             }
         }
+        // 更新，编辑，删除
+        $scope.edits = []; //控制编辑状态
+        //获取数据
         $http.get("http://106.15.62.222:3001" + "/icoListApi").then(function (result) {
             $scope.icoLists = result.data;
-            return $scope.icoLists;
-        }).then(function save(icoLists) {
-            $scope.ico = icoLists;
-            $scope.edit = false;
-            //console.log($scope.edit);
-            //console.log($scope.ico[0]);
+            console.log($scope.icoLists)
         })
-        // console.log($rootScope.icoList+"hello");
-        // httpPromise.then(
-        //     // function save(icoLists) {
-        //     //     $scope.edit = false;
-        //     //     console.log(icoLists);
-        //     // }
-        //     $scope.save = function (icoLists) { console.log(icoLists); $scope.edit = false; }
-        // )
-        //console.log($scope.icoLists);
-        $scope.edit = false;
-        $scope.editor = function () { $scope.edit = true; }
-        $scope.save = function () {
-            $scope.edit = false;
-            $http.post("http://106.15.62.222:3001" + "/icoListApi/update/1", $scope.icoLists[0]).then(function (result) {
-                // $scope.banners.push = $scope.params;
-                console.log(result);
+        //编辑
+        $scope.editor = function (index) {
+            $scope.edits = [];
+            $scope.edits[index] = true;
+        }
+        //保存
+        $scope.save = function (index) {
+            $scope.edits = [];
+            $scope.index = index + 1;
+            console.log($scope.index);
+            //console.log($scope.icoLists[index]) //制定项
+            $http.post("http://106.15.62.222:3001" + "/icoListApi/update/" + $scope.index, $scope.icoLists[index]).then(function (result) {
+                console.log(result.data);
+                alert("修改成功！")
             })
         }
+        //删除
+        $scope.delete = function (index) {
+            $scope.icoLists.splice(index, 1)
+        }
+
+
 
         //分页
         // $scope.totalItems = 64;
@@ -352,10 +373,43 @@ angular.module('controllerModule', [])
                 // $scope.banners.push = $scope.params;
                 console.log(result);
             })
+
         }
+        // $http.get("http://106.15.62.222:3001" + "/icoDetailsApi").then(function (result) {
+        //     $scope.icoDetails = result.data;
+        // })
+        // 更新，编辑，删除
+        $scope.edits = []; //控制编辑状态
+        //获取数据
         $http.get("http://106.15.62.222:3001" + "/icoDetailsApi").then(function (result) {
             $scope.icoDetails = result.data;
         })
+        //编辑
+        $scope.editor = function (index) {
+            $scope.edits = [];
+            $scope.edits[index] = true;
+        }
+        //保存
+        $scope.save = function (index) {
+            $scope.edits = [];
+            $scope.index = index + 1;
+            console.log($scope.index);
+            //console.log($scope.icoLists[index]) //制定项
+            $http.post("http://106.15.62.222:3001" + "/bannerApi/update/" + $scope.index, $scope.icoDetails[index]).then(function (result) {
+                console.log(result.data);
+                alert("修改成功！")
+            })
+        }
+        //删除
+        $scope.delete = function (index) {
+            $scope.icoDetails.splice(index, 1)
+        }
+
+        //分页
+        $scope.maxSize = 10;
+        $scope.bigTotalItems = 300;
+        $scope.bigCurrentPage = 1;
+        $scope.numPages = 70;
     })
     .controller('eventListCtrl', function ($translate, $scope, $rootScope, $http) {
         $scope.eventList = [];
@@ -379,6 +433,38 @@ angular.module('controllerModule', [])
         $http.get("http://106.15.62.222:3001" + "/eventListApi").then(function (result) {
             $scope.eventList = result.data;
         })
+        // 更新，编辑，删除
+        $scope.edits = []; //控制编辑状态
+        //获取数据
+        // $http.get("http://106.15.62.222:3001" + "/eventListApi").then(function (result) {
+        //     $scope.eventList = result.data;
+        // })
+        //编辑
+        $scope.editor = function (index) {
+            $scope.edits = [];
+            $scope.edits[index] = true;
+        }
+        //保存
+        $scope.save = function (index) {
+            $scope.edits = [];
+            $scope.index = index + 1;
+            console.log($scope.index);
+            console.log($scope.eventList[index]) //制定项
+            $http.post("http://106.15.62.222:3001" + "/eventListApi/update/" + $scope.index, $scope.eventList[index]).then(function (result) {
+                console.log(result.data);
+                alert("修改成功！")
+            })
+        }
+        //删除
+        $scope.delete = function (index) {
+            $scope.eventListApi.splice(index, 1)
+        }
+
+        //分页
+        $scope.maxSize = 10;
+        $scope.bigTotalItems = 300;
+        $scope.bigCurrentPage = 1;
+        $scope.numPages = 70;
 
 
         //datePicker

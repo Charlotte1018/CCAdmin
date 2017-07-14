@@ -15,7 +15,6 @@
                                     <table class="table table-striped border-top">
                                         <thead>
                                             <tr>
-                                                <th style="width:8px;"><input type="checkbox" class="group-checkable" /></th>
                                                 <th>id</th>
                                                 <th>name</th>
                                                 <th>path</th>
@@ -31,9 +30,8 @@
 
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <!-- <tbody>
                                             <tr class="odd gradeX" ng-repeat="x in banners" render-finish>
-                                                <td><input type="checkbox" class="checkboxes" value="1" /></td>
                                                 <td>{{x.id}}</td>
                                                 <td>{{x.name}}</td>
                                                 <td>{{x.path}}</td>
@@ -44,12 +42,52 @@
                                                 <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor()">编辑</button></td>
                                                 <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save()">保存</button></td>
                                                 <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="">删除</button></td>
-                                                <!-- <td>{{x.lastModifyDate}}</td>
-                                                    <td>{{x.lastModifyUser}}</td> -->
-                                                <!--<td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
-                                                    </tr>-->
+                                                 <td>{{x.lastModifyDate}}</td>
+                                                    <td>{{x.lastModifyUser}}</td> 
+                                                <td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
+                                                    </tr>
+                                        </tbody> -->
+                                        <tbody>
+                                            <tr class="odd gradeX" ng-repeat="x in banners" render-finish>
+                                                <td>
+                                                    <span ng-hide="edits[$index]" ng-hide="edits[$index]">{{x.id}}</span>
+                                                    <input type="text" ng-model="x.id" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.name}}</span>
+                                                    <input type="text" ng-model="x.name" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.path}}</span>
+                                                    <input type="text" ng-model="x.path" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.location}}</span>
+                                                    <input type="text" ng-model="x.location" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.status}}</span>
+                                                    <input type="text" ng-model="x.status" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.startDate}}</span>
+                                                    <input type="text" ng-model="x.startDate" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.endDate}}</span>
+                                                    <input type="text" ng-model="x.endDate" ng-show="edits[$index]">
+                                                </td>
+                                                
+                                                <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor($index)">编辑</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save($index)">保存</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="delete($index)">删除</button></td>
                                         </tbody>
                                     </table>
+                                    <div style="text-align:center;">
+                                        <ul uib-pagination total-items="bigTotalItems" first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页" ng-model="bigCurrentPage"
+                                            max-size="maxSize" class="pagination" boundary-links="true" force-ellipses="true"></ul>
+                                        <!-- <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre> -->
+                                    </div>
                                 </div>
                             </fieldset>
                         </form>

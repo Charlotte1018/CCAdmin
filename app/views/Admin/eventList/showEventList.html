@@ -15,7 +15,6 @@
                                     <table class="table table-striped border-top">
                                         <thead>
                                             <tr>
-                                                <th style="width:8px;"><input type="checkbox" class="group-checkable" /></th>
                                                 <th>id</th>
                                                 <th>eventName</th>
                                                 <th>eventDate</th>
@@ -29,23 +28,39 @@
 
                                             </tr>
                                         </thead>
+                                        
                                         <tbody>
                                             <tr class="odd gradeX" ng-repeat="x in eventList" render-finish>
-                                                <td><input type="checkbox" class="checkboxes" value="1" /></td>
-                                                <td>{{x.id}}</td>
-                                                <td>{{x.eventName}}</td>
-                                                <td>{{x.eventDate}}</td>
-                                                <td>{{x.eventLocation}}</td>
-                                                <td>{{x.eventURL}}</td>
-                                                <!-- <td>{{x.lastModifyDate}}</td>
-                                                <td>{{x.lastModifyUser}}</td> -->
-                                                <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor()">编辑</button></td>
-                                                <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save()">保存</button></td>
-                                                <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="">删除</button></td>
-                                                <!--<td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
-                                                    </tr>-->
+                                                <td>
+                                                    <span ng-hide="edits[$index]" ng-hide="edits[$index]">{{x.id}}</span>
+                                                    <input type="text" ng-model="x.id" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.eventName}}</span>
+                                                    <input type="text" ng-model="x.eventName" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.eventDate}}</span>
+                                                    <input type="text" ng-model="x.eventDate" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.eventLocation}}</span>
+                                                    <input type="text" ng-model="x.eventLocation" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.eventURL}}</span>
+                                                    <input type="text" ng-model="x.eventURL" ng-show="edits[$index]">
+                                                </td>
+                                                <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor($index)">编辑</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save($index)">保存</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="delete($index)">删除</button></td>
                                         </tbody>
                                     </table>
+                                    <div style="text-align:center;">
+                                        <ul uib-pagination total-items="bigTotalItems" first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页" ng-model="bigCurrentPage"
+                                            max-size="maxSize" class="pagination" boundary-links="true" force-ellipses="true"></ul>
+                                        <!-- <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre> -->
+                                    </div>
                                 </div>
                             </fieldset>
                         </form>

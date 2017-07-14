@@ -1,60 +1,111 @@
+<section class="profile-nav alt green-border ">
+    <section class="wrapper ">
+        <!-- page start-->
+        <div class="row col-xl-12 ">
+            <div>
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h4>Show IcoDetails</h4>
+                    </header>
 
-    <section class="profile-nav alt green-border ">
-        <section class="wrapper ">
-            <!-- page start-->
-            <div class="row col-xl-12 ">
-                <div>
-                    <section class="panel">
-                        <header class="panel-heading">
-                            <h4>Show IcoDetails</h4>
-                        </header>
-                        
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="default">
-                                <fieldset>
-                                    <div><br><br>
+                    <div class="panel-body">
+                        <form class="form-horizontal" id="default">
+                            <fieldset>
+                                <div><br><br>
 
-                                        <table class="table table-striped border-top">
-                                            <thead>
-                                                <tr>
-                                                    <th>id</th>
-                                                    <th>icoID</th>
-                                                    <th>icoPlatform</th>
-                                                    <th>icoWebSite</th>
-                                                    <th>icoLocation</th>
-                                                    <th >icoTotalSupply</th>
-                                                    <th>icoWhitePaperPath</th>
-                                                    <th>icoDistribution</th>
-                                                    <th>icoTeamMember</th>
-                                                    <th>lastModifyDate</th>
-                                                    <th>lastModifyUser</th>
+                                    <table class="table table-striped border-top">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>icoID</th>
+                                                <th>icoPlatform</th>
+                                                <th>icoWebSite</th>
+                                                <th>icoLocation</th>
+                                                <th>icoTotalSupply</th>
+                                                <th>icoWhitePaperPath</th>
+                                                <th>icoDistribution</th>
+                                                <th>icoTeamMember</th>
+                                                <th>edit</th>
+                                                <th>save</th>
+                                                <th>delete</th>
+                                                <!-- <th>lastModifyDate</th>
+                                                    <th>lastModifyUser</th> -->
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="odd gradeX" ng-repeat="x in icoDetails" render-finish>
-                                                    <td>{{x.id}}</td>
-                                                    <td>{{x.icoID}}</td>
-                                                    <td>{{x.icoPlatform}}</td>
-                                                    <td>{{x.icoWebSite}}</td>
-                                                    <td>{{x.icoLocation}}</td>
-                                                    <td>{{x.icoTotalSupply}}</td>
-                                                    <td>{{x.icoWhitePaperPath}}</td>
-                                                    <td>{{x.icoDistribution}}</td>
-                                                    <td>{{x.icoTeamMember}}</td>
-                                                    <td>{{x.lastModifyDate}}</td>
-                                                    <td>{{x.lastModifyUser}}</td>
-                                                    <!--<td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
-                                                    </tr>-->
-                                            </tbody>
-                                        </table>
+                                            </tr>
+                                        </thead>
+                                        <!-- <tbody>
+                                            <tr class="odd gradeX" ng-repeat="x in icoDetails" render-finish>
+                                                <td>{{x.id}}</td>
+                                                <td>{{x.icoID}}</td>
+                                                <td>{{x.icoPlatform}}</td>
+                                                <td>{{x.icoWebSite}}</td>
+                                                <td>{{x.icoLocation}}</td>
+                                                <td>{{x.icoTotalSupply}}</td>
+                                                <td>{{x.icoWhitePaperPath}}</td>
+                                                <td>{{x.icoDistribution}}</td>
+                                                <td>{{x.icoTeamMember}}</td>
+                                                <td>{{x.lastModifyDate}}</td>
+                                                <td>{{x.lastModifyUser}}</td>
+                                                <td class="hidden-phone "><span class="btn btn-success btn-sm">{{x.value}}</span> </td>
+                                                    </tr>
+                                        </tbody> -->
+                                        <tbody>
+                                            <tr class="odd gradeX" ng-repeat="x in icoDetails" render-finish>
+                                                <td>
+                                                    <span ng-hide="edits[$index]" ng-hide="edits[$index]">{{x.id}}</span>
+                                                    <input type="text" ng-model="x.id" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.icoID}}</span>
+                                                    <input type="text" ng-model="x.icoID" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.icoPlatform}}</span>
+                                                    <input type="text" ng-model="x.icoPlatform" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.icoWebSite}}</span>
+                                                    <input type="text" ng-model="x.icoWebSite" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.icoLocation}}</span>
+                                                    <input type="text" ng-model="x.icoLocation" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.icoTotalSupply}}</span>
+                                                    <input type="text" ng-model="x.icoTotalSupply" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.icoWhitePaperPath}}</span>
+                                                    <input type="text" ng-model="x.icoWhitePaperPath" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.icoDistribution}}</span>
+                                                    <input type="text" ng-model="x.icoDistribution" ng-show="edits[$index]">
+                                                </td>
+                                                <td>
+                                                    <span ng-hide="edits[$index]">{{x.icoTeamMember}}</span>
+                                                    <input type="text" ng-model="x.icoTeamMember" ng-show="edits[$index]">
+                                                </td>
+
+
+                                                <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor($index)">编辑</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save($index)">保存</button></td>
+                                                <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="delete($index)">删除</button></td>
+                                        </tbody>
+                                    </table>
+                                    <div style="text-align:center;">
+                                        <ul uib-pagination total-items="bigTotalItems" first-text="首页" last-text="尾页" previous-text="上一页" next-text="下一页" ng-model="bigCurrentPage"
+                                            max-size="maxSize" class="pagination" boundary-links="true" force-ellipses="true"></ul>
+                                        <!-- <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre> -->
                                     </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </section>
-                </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </section>
             </div>
-            <!-- page end-->
-        </section>
+        </div>
+        <!-- page end-->
     </section>
+</section>
