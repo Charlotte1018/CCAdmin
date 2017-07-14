@@ -1,6 +1,7 @@
 angular.module('controllerModule', [])
     .controller('mainCtrl', function ($translate, $scope, $http, $rootScope, $state) {
         //$rootScope.lastModifyUser = username;
+
     })
     .controller('loginCtrl', function ($scope, $http, $rootScope, $state) {
         $rootScope.lastModifyUser = $scope.username;
@@ -19,7 +20,7 @@ angular.module('controllerModule', [])
             })
         }
     })
-    .controller('homeCtrl', function ($translate, $scope, $rootScope) {
+    .controller('homeCtrl', function ($translate, $scope, $rootScope, $http) {
         $scope.host = [
             "localhost:3000",
             "http://106.15.62.222:3001"
@@ -28,6 +29,41 @@ angular.module('controllerModule', [])
             $rootScope.Host = $scope.seclect;
             console.log($scope.seclect);
         }
+
+
+
+
+        //图片加载
+        $scope.reader = new FileReader();   //创建一个FileReader接口
+        $scope.form = {     //用于绑定提交内容，图片或其他数据
+            image: {},
+        };
+        $scope.thumb = {};      //用于存放图片的base64
+        $scope.thumb_default = {    //用于循环默认的‘加号’添加图片的框
+            1111: {}
+        };
+
+        $scope.img_upload = function (files) {       //单次提交图片的函数
+            $scope.guid = (new Date()).valueOf();   //通过时间戳创建一个随机数，作为键名使用
+            $scope.reader = new FileReader();
+            $scope.reader.readAsDataURL(files[0]);
+            console.log(files[0]);
+            $scope.files = files[0];
+            //FileReader的方法，把图片转成base64
+            $scope.reader.onload = function (ev) {
+                $scope.$apply(function () {
+                    $scope.thumb[$scope.guid] = {
+                        imgSrc: ev.target.result,  //接收base64
+                    }
+                    console.log($scope.thumb[$scope.guid]);
+                });
+            };
+            var data = new FormData();      //以下为像后台提交图片数据
+            data.append('image', files[0]);
+            data.append('guid', $scope.guid);
+            console.log(data);
+        };
+
     })
     .controller('bannerCtrl', function ($translate, $scope, $rootScope, $http) {
         $scope.banners = [];

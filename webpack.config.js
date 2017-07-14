@@ -11,7 +11,9 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: './app/views/**/*' }
+      { from: './app/views/**/*',
+        from: './app/images/**'
+     }
     ]),
     new htmlWebpackPlugin({
       filename: "index.html",
