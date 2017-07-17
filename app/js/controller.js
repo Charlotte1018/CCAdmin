@@ -101,7 +101,7 @@ angular.module('controllerModule', [])
         //保存
         $scope.save = function (index) {
             $scope.edits = [];
-            $scope.index = index + 1;
+            
             $scope.id = $scope.banners[index].id;
             console.log($scope.index);
             //console.log($scope.icoLists[index]) //制定项
@@ -112,7 +112,7 @@ angular.module('controllerModule', [])
         }
         //删除
         $scope.delete = function (index) {
-            $scope.index = index + 1;
+            
             $scope.id = $scope.banners[index].id;
             console.log($scope.id);
             //$scope.banners.splice(index, 1)
