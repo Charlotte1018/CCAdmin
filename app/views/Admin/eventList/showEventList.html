@@ -32,8 +32,7 @@
                                         <tbody>
                                             <tr class="odd gradeX" ng-repeat="x in eventList" render-finish>
                                                 <td>
-                                                    <span ng-hide="edits[$index]" ng-hide="edits[$index]">{{x.id}}</span>
-                                                    <input type="text" ng-model="x.id" ng-show="edits[$index]">
+                                                    <span>{{x.id}}</span>
                                                 </td>
                                                 <td>
                                                     <span ng-hide="edits[$index]">{{x.eventName}}</span>

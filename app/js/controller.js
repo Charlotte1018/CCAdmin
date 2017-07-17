@@ -1,13 +1,30 @@
 angular.module('controllerModule', [])
     .controller('mainCtrl', function ($translate, $scope, $http, $rootScope, $state) {
-        //$rootScope.lastModifyUser = username;
+        $scope.login = function () {
+            $scope.params = {
+                "name": $scope.username,
+                "password": $scope.password
+            };
+            $rootScope.lastModifyUser = $scope.username;
+            console.log($scope.username);
+            console.log($rootScope.lastModifyUser);
+            $http.post("http://106.15.62.222:3001" + "/userApi/login", $scope.params).then(function (result) {
+                console.log(result);
+                if (result.data) {
+                    console.log(result.data);
+                    $state.go("CCAdmin.home");
+                } else {
+                    alert("您输入的用户名或密码有误！");
+                }
+            })
+        }
 
     })
     .controller('loginCtrl', function ($scope, $http, $rootScope, $state) {
         $rootScope.lastModifyUser = $scope.username;
         $scope.login = function () {
             $scope.params = {
-                "name": $scope.username,
+                "name": $rootScope.username,
                 "password": $scope.password
             };
             $http.post("http://106.15.62.222:3001" + "/userApi/login", $scope.params).then(function (result) {
@@ -30,7 +47,7 @@ angular.module('controllerModule', [])
             $rootScope.Host = $scope.seclect;
             console.log($scope.seclect);
         }
-
+        //console.log($rootScope.lastModifyUser);
 
 
 
@@ -68,6 +85,17 @@ angular.module('controllerModule', [])
     })
     .controller('bannerCtrl', function ($translate, $scope, $rootScope, $http) {
         $scope.banners = [];
+        $scope.selectLocation = {
+            "top": "0",
+            "top2": "1",
+            "bottom": "2"
+        }
+        $scope.selectStatus = {
+            "offline": "0",
+            "online": "1"
+        }
+        $scope.isDeleted = 0;
+        //console.log($rootScope.Host);
         $scope.lastModifyDate = new Date().toUTCString();
         $scope.createBanner = function () {
             $scope.params = [
@@ -83,9 +111,11 @@ angular.module('controllerModule', [])
                     "isDeleted": $scope.isDeleted
                 }
             ]
+            //console.log($scope.params);
             $http.post("http://106.15.62.222:3001" + "/bannerApi/create", $scope.params).then(function (result) {
-                console.log(result);
+                console.log(result.data.result);
             })
+            alert("创建成功！")
         }
         // 更新，编辑，删除
         $scope.edits = []; //控制编辑状态
@@ -102,7 +132,7 @@ angular.module('controllerModule', [])
         //保存
         $scope.save = function (index) {
             $scope.edits = [];
-            
+
             $scope.id = $scope.banners[index].id;
             console.log($scope.index);
             //console.log($scope.icoLists[index]) //制定项
@@ -113,19 +143,24 @@ angular.module('controllerModule', [])
         }
         //删除
         $scope.delete = function (index) {
-            
+
             $scope.id = $scope.banners[index].id;
             console.log($scope.id);
             //$scope.banners.splice(index, 1)
 
             $http.post("http://106.15.62.222:3001" + "/bannerApi/delete/" + $scope.id).then(function (result) {
                 console.log(result.data);
-                //alert("删除成功！")
+                $http.get("http://106.15.62.222:3001" + "/bannerApi").then(function (result) {
+                    $scope.banners = result.data;
+                    //console.log($scope.banners);
+                })
+                alert("删除成功！")
+
             })
-            $http.get("http://106.15.62.222:3001" + "/bannerApi").then(function (result) {
-                $scope.banners = result.data;
-                console.log($scope.banners);
-            })
+            // $http.get("http://106.15.62.222:3001" + "/bannerApi").then(function (result) {
+            //     $scope.banners = result.data;
+            //     //console.log($scope.banners);
+            // })
         }
 
         //分页
@@ -135,104 +170,20 @@ angular.module('controllerModule', [])
         $scope.numPages = 70;
 
         //datePicker
-        $scope.today = function () {
-            $scope.startDate = new Date();
-            $scope.endDate = new Date();
-        };
-        $scope.today();
 
-        $scope.clear = function () {
-            $scope.startDate = null;
-            $scope.endDate = null;
-        };
-
-        $scope.inlineOptions = {
-            customClass: getDayClass,
-            minDate: new Date(),
-            showWeeks: true
-        };
-
-        $scope.dateOptions = {
-            //dateDisabled: disabled,
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 1
-        };
-
-        // Disable weekend selection
-        function disabled(data) {
-            var date = data.date,
-                mode = data.mode;
-            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-        }
-
-        $scope.toggleMin = function () {
-            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-        };
-
-        $scope.toggleMin();
-
-        $scope.open1 = function () {
-            $scope.popup1.opened = true;
-        };
-
-        $scope.open2 = function () {
-            $scope.popup2.opened = true;
-        };
-
-        $scope.setDate = function (year, month, day) {
-            $scope.dt = new Date(year, month, day);
-        };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-        $scope.altInputFormats = ['M!/d!/yyyy'];
-
-        $scope.popup1 = {
-            opened: false
-        };
-
-        $scope.popup2 = {
-            opened: false
-        };
-
-        var tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        var afterTomorrow = new Date();
-        afterTomorrow.setDate(tomorrow.getDate() + 1);
-        $scope.events = [
-            {
-                date: tomorrow,
-                status: 'full'
-            },
-            {
-                date: afterTomorrow,
-                status: 'partially'
-            }
-        ];
-
-        function getDayClass(data) {
-            var date = data.date,
-                mode = data.mode;
-            if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-                for (var i = 0; i < $scope.events.length; i++) {
-                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-                    if (dayToCheck === currentDay) {
-                        return $scope.events[i].status;
-                    }
-                }
-            }
-
-            return '';
-        }
     })
     .controller('icoListCtrl', function ($translate, $state, $rootScope, $scope, $http) {
         $scope.lastModifyDate = new Date().toUTCString();
+        $scope.selectStatus = {
+            "achieved": "0",
+            "upcomming": "1",
+            "live": "2"
+        }
+        $scope.selectisRecommended = {
+            "noRecommended": "0",
+            "Recommended": "1"
+        }
+        $scope.isDeleted = 0;
         $scope.createIcoList = function () {
             if (confirm("您是否确定提交本页？")) {
                 alert("提交并填写详情页");
@@ -246,12 +197,13 @@ angular.module('controllerModule', [])
                         "endDate": $scope.endDate,
                         "description": $scope.description,
                         "lastModifyDate": $scope.lastModifyDate,
-                        "lastModifyUser": $scope.name
+                        "lastModifyUser": $scope.lastModifyUser,
+                        "isDeleted": $scope.isDeleted
                     }
                 ]
                 $http.post("http://106.15.62.222:3001" + "/icoListApi/create", $scope.params).then(function (result) {
                     // $scope.banners.push = $scope.params;
-                    console.log(result);
+                    console.log(result.data.result);
                 })
                 $state.go("CCAdmin.createIcoDetails");
             }
@@ -274,17 +226,29 @@ angular.module('controllerModule', [])
         //保存
         $scope.save = function (index) {
             $scope.edits = [];
-            $scope.index = index + 1;
-            console.log($scope.index);
+            $scope.id = $scope.icoLists[index].id;
+            console.log($scope.id);
             //console.log($scope.icoLists[index]) //制定项
-            $http.post("http://106.15.62.222:3001" + "/icoListApi/update/" + $scope.index, $scope.icoLists[index]).then(function (result) {
+            $http.post("http://106.15.62.222:3001" + "/icoListApi/update/" + $scope.id, $scope.icoLists[index]).then(function (result) {
                 console.log(result.data);
                 alert("修改成功！")
             })
         }
         //删除
         $scope.delete = function (index) {
-            $scope.icoLists.splice(index, 1)
+            $scope.id = $scope.icoLists[index].id;
+            console.log($scope.id);
+            //$scope.banners.splice(index, 1)
+
+            $http.post("http://106.15.62.222:3001" + "/icoListApi/delete/" + $scope.id).then(function (result) {
+                console.log(result.data);
+                $http.get("http://106.15.62.222:3001" + "/icoListApi").then(function (result) {
+                    $scope.icoLists = result.data;
+                    //console.log($scope.icoLists);
+                })
+                alert("删除成功！")
+            })
+
         }
 
 
@@ -301,111 +265,11 @@ angular.module('controllerModule', [])
         $scope.bigTotalItems = 300;
         $scope.bigCurrentPage = 1;
         $scope.numPages = 70;
-
-
-
-
-
-        //datePicker
-        $scope.today = function () {
-            $scope.startDate = new Date();
-            $scope.endDate = new Date();
-        };
-        $scope.today();
-
-        $scope.clear = function () {
-            $scope.startDate = null;
-            $scope.endDate = null;
-        };
-
-        $scope.inlineOptions = {
-            customClass: getDayClass,
-            minDate: new Date(),
-            showWeeks: true
-        };
-
-        $scope.dateOptions = {
-            //dateDisabled: disabled,
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 1
-        };
-
-        // Disable weekend selection
-        function disabled(data) {
-            var date = data.date,
-                mode = data.mode;
-            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-        }
-
-        $scope.toggleMin = function () {
-            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-        };
-
-        $scope.toggleMin();
-
-        $scope.open1 = function () {
-            $scope.popup1.opened = true;
-        };
-
-        $scope.open2 = function () {
-            $scope.popup2.opened = true;
-        };
-
-        $scope.setDate = function (year, month, day) {
-            $scope.dt = new Date(year, month, day);
-        };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-        $scope.altInputFormats = ['M!/d!/yyyy'];
-
-        $scope.popup1 = {
-            opened: false
-        };
-
-        $scope.popup2 = {
-            opened: false
-        };
-
-        var tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        var afterTomorrow = new Date();
-        afterTomorrow.setDate(tomorrow.getDate() + 1);
-        $scope.events = [
-            {
-                date: tomorrow,
-                status: 'full'
-            },
-            {
-                date: afterTomorrow,
-                status: 'partially'
-            }
-        ];
-
-        function getDayClass(data) {
-            var date = data.date,
-                mode = data.mode;
-            if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-                for (var i = 0; i < $scope.events.length; i++) {
-                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-                    if (dayToCheck === currentDay) {
-                        return $scope.events[i].status;
-                    }
-                }
-            }
-
-            return '';
-        }
     })
     .controller('icoDetailCtrl', function ($translate, $scope, $rootScope, $http, $log) {
         $scope.icoDetails = [];
         $scope.lastModifyDate = new Date().toUTCString();
+        $scope.isDeleted = 0;
         $scope.createIcoDetail = function () {
             $scope.params = [
                 {
@@ -418,18 +282,18 @@ angular.module('controllerModule', [])
                     "icoDistribution": $scope.icoDistribution,
                     "icoTeamMember": $scope.icoTeamMember,
                     "lastModifyDate": $scope.lastModifyDate,
-                    "lastModifyUser": $scope.lastModifyUser
+                    "lastModifyUser": $scope.lastModifyUser,
+                    'isDeleted': $scope.isDeleted
                 }
             ]
+            //alert("创建成功！");
             $http.post("http://106.15.62.222:3001" + "/icoDetailsApi/create", $scope.params).then(function (result) {
                 // $scope.banners.push = $scope.params;
-                console.log(result);
+                alert("创建成功！");
+                console.log(result.data.result);
             })
 
         }
-        // $http.get("http://106.15.62.222:3001" + "/icoDetailsApi").then(function (result) {
-        //     $scope.icoDetails = result.data;
-        // })
         // 更新，编辑，删除
         $scope.edits = []; //控制编辑状态
         //获取数据
@@ -444,17 +308,29 @@ angular.module('controllerModule', [])
         //保存
         $scope.save = function (index) {
             $scope.edits = [];
-            $scope.index = index + 1;
-            console.log($scope.index);
+            $scope.id = $scope.icoDetails[index].id;
+            console.log($scope.id);
             //console.log($scope.icoLists[index]) //制定项
-            $http.post("http://106.15.62.222:3001" + "/bannerApi/update/" + $scope.index, $scope.icoDetails[index]).then(function (result) {
+            $http.post("http://106.15.62.222:3001" + "/icoDetails/update/" + $scope.id, $scope.icoDetails[index]).then(function (result) {
                 console.log(result.data);
                 alert("修改成功！")
             })
         }
         //删除
         $scope.delete = function (index) {
-            $scope.icoDetails.splice(index, 1)
+            $scope.id = $scope.icoDetails[index].id;
+            console.log($scope.id);
+            //$scope.banners.splice(index, 1)
+
+            $http.post("http://106.15.62.222:3001" + "/icoDetails/delete/" + $scope.id).then(function (result) {
+                console.log(result.data);
+                $http.get("http://106.15.62.222:3001" + "/icoDetails").then(function (result) {
+                    $scope.icoDetails = result.data;
+                    //console.log($scope.icoLists);
+                })
+                alert("删除成功！")
+            })
+
         }
 
         //分页
@@ -466,6 +342,7 @@ angular.module('controllerModule', [])
     .controller('eventListCtrl', function ($translate, $scope, $rootScope, $http) {
         $scope.eventList = [];
         $scope.lastModifyDate = new Date().toUTCString();
+        $scope.isDeleted = 0;
         $scope.createEventList = function () {
             $scope.params = [
                 {
@@ -474,12 +351,13 @@ angular.module('controllerModule', [])
                     "eventLocation": $scope.eventLocation,
                     "eventURL": $scope.eventURL,
                     "lastModifyDate": $scope.lastModifyDate,
-                    "lastModifyUser": $scope.lastModifyUser
+                    "lastModifyUser": $scope.lastModifyUser,
+                    'isDeleted': $scope.isDeleted
                 }
             ]
             $http.post("http://106.15.62.222:3001" + "/eventListApi/create", $scope.params).then(function (result) {
                 // $scope.banners.push = $scope.params;
-                console.log(result);
+                console.log(result.data.result);
             })
         }
         $http.get("http://106.15.62.222:3001" + "/eventListApi").then(function (result) {
@@ -499,17 +377,30 @@ angular.module('controllerModule', [])
         //保存
         $scope.save = function (index) {
             $scope.edits = [];
-            $scope.index = index + 1;
-            console.log($scope.index);
+            $scope.id = $scope.eventList[index].id;
+            console.log($scope.id);
             console.log($scope.eventList[index]) //制定项
-            $http.post("http://106.15.62.222:3001" + "/eventListApi/update/" + $scope.index, $scope.eventList[index]).then(function (result) {
+            $http.post("http://106.15.62.222:3001" + "/eventListApi/update/" + $scope.id, $scope.eventList[index]).then(function (result) {
                 console.log(result.data);
                 alert("修改成功！")
             })
         }
         //删除
         $scope.delete = function (index) {
-            $scope.eventListApi.splice(index, 1)
+            $scope.id = $scope.eventList[index].id;
+            console.log($scope.id);
+            //$scope.banners.splice(index, 1)
+
+            $http.post("http://106.15.62.222:3001" + "/eventListApi/delete/" + $scope.id).then(function (result) {
+                console.log(result.data);
+                $http.get("http://106.15.62.222:3001" + "/eventListApi").then(function (result) {
+                    $scope.eventList = result.data;
+                })
+                alert("删除成功！")
+            })
+
+
+
         }
 
         //分页
@@ -517,104 +408,6 @@ angular.module('controllerModule', [])
         $scope.bigTotalItems = 300;
         $scope.bigCurrentPage = 1;
         $scope.numPages = 70;
-
-
-        //datePicker
-        $scope.today = function () {
-            $scope.startDate = new Date();
-            $scope.endDate = new Date();
-        };
-        $scope.today();
-
-        $scope.clear = function () {
-            $scope.startDate = null;
-            $scope.endDate = null;
-        };
-
-        $scope.inlineOptions = {
-            customClass: getDayClass,
-            minDate: new Date(),
-            showWeeks: true
-        };
-
-        $scope.dateOptions = {
-            //dateDisabled: disabled,
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 1
-        };
-
-        // Disable weekend selection
-        function disabled(data) {
-            var date = data.date,
-                mode = data.mode;
-            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-        }
-
-        $scope.toggleMin = function () {
-            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-        };
-
-        $scope.toggleMin();
-
-        $scope.open1 = function () {
-            $scope.popup1.opened = true;
-        };
-
-        $scope.open2 = function () {
-            $scope.popup2.opened = true;
-        };
-
-        $scope.setDate = function (year, month, day) {
-            $scope.dt = new Date(year, month, day);
-        };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-        $scope.altInputFormats = ['M!/d!/yyyy'];
-
-        $scope.popup1 = {
-            opened: false
-        };
-
-        $scope.popup2 = {
-            opened: false
-        };
-
-        var tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        var afterTomorrow = new Date();
-        afterTomorrow.setDate(tomorrow.getDate() + 1);
-        $scope.events = [
-            {
-                date: tomorrow,
-                status: 'full'
-            },
-            {
-                date: afterTomorrow,
-                status: 'partially'
-            }
-        ];
-
-        function getDayClass(data) {
-            var date = data.date,
-                mode = data.mode;
-            if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-                for (var i = 0; i < $scope.events.length; i++) {
-                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-                    if (dayToCheck === currentDay) {
-                        return $scope.events[i].status;
-                    }
-                }
-            }
-
-            return '';
-        }
     })
     .controller('articleEditor', ['$scope', 'textAngularManager', function articleEditor($scope, textAngularManager, $http) {
         $scope.htmlcontent = "<p>在此编辑你的文章!</p>";

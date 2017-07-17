@@ -28,9 +28,42 @@
 
                             </div>
                         </div>
+                        <div>
+                            <label class="col-lg-2 control-label">Select:</label>
+                            <div class="col-lg-10 ">
+                                <input type="text" class="form_datetime1 form-control">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="col-lg-2 control-label">Select:</label>
+                            <div class="col-lg-10 ">
+                                <input type="text" class="form_datetime2 form-control">
+                            </div>
+                        </div>
                     </form>
                 </div>
             </section>
         </div>
     </section>
 </section>
+
+<script type="text/javascript">
+    $(".form_datetime1").datetimepicker({
+        format: "yyyy-mm-dd - hh:ii",
+        autoclose: true,
+        showMeridian: true,
+        todayBtn: true,
+        startDate: "2013-02-14 10:00",
+        minuteStep: 10,
+        pickerPosition: "left-bottom"
+    });
+    $(".form_datetime2").datetimepicker({
+        format: "yyyy-mm-dd - hh:ii",
+        autoclose: true,
+        showMeridian: true,
+        todayBtn: true,
+        startDate: "2013-02-14 10:00",
+        minuteStep: 10,
+        pickerPosition: "left-bottom"
+    });
+</script>

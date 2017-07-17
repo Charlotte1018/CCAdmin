@@ -50,9 +50,12 @@
                                         </tbody> -->
                                         <tbody>
                                             <tr class="odd gradeX" ng-repeat="x in banners" render-finish>
-                                                <td>
+                                                <!-- <td>
                                                     <span ng-hide="edits[$index]" ng-hide="edits[$index]">{{x.id}}</span>
                                                     <input type="text" ng-model="x.id" ng-show="edits[$index]">
+                                                </td> -->
+                                                <td>
+                                                    <span >{{x.id}}</span>
                                                 </td>
                                                 <td>
                                                     <span ng-hide="edits[$index]">{{x.name}}</span>

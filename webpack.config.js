@@ -12,7 +12,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: './app/views/**/*',
-        from: './app/images/**'
+        from: './app/images/**',
+        from: './app/frame/**'
      }
     ]),
     new htmlWebpackPlugin({
@@ -21,7 +22,7 @@ module.exports = {
       inject: 'head',
       minify: {
         removeComments: true,
-        collapseWhitespace: true
+        collapseWhitespace: false
       }
     })
   ],
