@@ -11,11 +11,12 @@ angular.module('controllerModule', [])
                 "password": $scope.password
             };
             $http.post("http://106.15.62.222:3001" + "/userApi/login", $scope.params).then(function (result) {
-                if (result) {
+                console.log(result);
+                if (result.data) {
                     console.log(result.data);
                     $state.go("CCAdmin.home");
                 } else {
-                    alert("您输入的用户名或密码有误！")
+                    alert("您输入的用户名或密码有误！");
                 }
             })
         }
