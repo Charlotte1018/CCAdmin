@@ -5,9 +5,10 @@ angular.module('controllerModule', [])
                 "name": $scope.username,
                 "password": $scope.password
             };
-            $rootScope.lastModifyUser = $scope.username;
-            console.log($scope.username);
-            console.log($rootScope.lastModifyUser);
+            localStorage.lastModifyUser = $scope.username;
+            //$rootScope.lastModifyUser = $scope.username;
+            console.log(localStorage.lastModifyUser);
+            //console.log($rootScope.lastModifyUser);
             $http.post("http://106.15.62.222:3001" + "/userApi/login", $scope.params).then(function (result) {
                 console.log(result);
                 if (result.data) {
@@ -97,6 +98,8 @@ angular.module('controllerModule', [])
         $scope.isDeleted = 0;
         //console.log($rootScope.Host);
         $scope.lastModifyDate = new Date().toUTCString();
+        $scope.lastModifyUser = localStorage.lastModifyUser;
+        console.log($scope.lastModifyUser);
         $scope.createBanner = function () {
             $scope.params = [
                 {
@@ -111,11 +114,13 @@ angular.module('controllerModule', [])
                     "isDeleted": $scope.isDeleted
                 }
             ]
-            //console.log($scope.params);
+            console.log($scope.params);
             $http.post("http://106.15.62.222:3001" + "/bannerApi/create", $scope.params).then(function (result) {
-                console.log(result.data.result);
+                console.log(result.data);
+                console.log(result.data.result[0].lastModifyDate);
+
             })
-            alert("创建成功！")
+            // alert("创建成功！")
         }
         // 更新，编辑，删除
         $scope.edits = []; //控制编辑状态
@@ -139,6 +144,14 @@ angular.module('controllerModule', [])
             $http.post("http://106.15.62.222:3001" + "/bannerApi/update/" + $scope.id, $scope.banners[index]).then(function (result) {
                 console.log(result.data);
                 alert("修改成功！")
+            })
+            $scope.upDate = {
+                "lastModifyDate": $scope.lastModifyDate,
+                "lastModifyUser": $scope.lastModifyUser
+            }
+            $http.post("http://106.15.62.222:3001" + "/bannerApi/update/" + $scope.id, $scope.upDate).then(function (result) {
+                console.log(result.data);
+                //alert("修改成功！")
             })
         }
         //删除
@@ -174,6 +187,7 @@ angular.module('controllerModule', [])
     })
     .controller('icoListCtrl', function ($translate, $state, $rootScope, $scope, $http) {
         $scope.lastModifyDate = new Date().toUTCString();
+        $scope.lastModifyUser = localStorage.lastModifyUser;
         $scope.selectStatus = {
             "achieved": "0",
             "upcomming": "1",
@@ -233,6 +247,14 @@ angular.module('controllerModule', [])
                 console.log(result.data);
                 alert("修改成功！")
             })
+            $scope.upDate = {
+                "lastModifyDate": $scope.lastModifyDate,
+                "lastModifyUser": $scope.lastModifyUser
+            }
+            $http.post("http://106.15.62.222:3001" + "/icoListApi/update/" + $scope.id, $scope.upDate).then(function (result) {
+                console.log(result.data);
+                //alert("修改成功！")
+            })
         }
         //删除
         $scope.delete = function (index) {
@@ -270,6 +292,7 @@ angular.module('controllerModule', [])
         $scope.icoDetails = [];
         $scope.lastModifyDate = new Date().toUTCString();
         $scope.isDeleted = 0;
+        $scope.lastModifyUser = localStorage.lastModifyUser;
         $scope.createIcoDetail = function () {
             $scope.params = [
                 {
@@ -315,6 +338,15 @@ angular.module('controllerModule', [])
                 console.log(result.data);
                 alert("修改成功！")
             })
+            $scope.upDate = {
+                "lastModifyDate": $scope.lastModifyDate,
+                "lastModifyUser": $scope.lastModifyUser
+            }
+            $http.post("http://106.15.62.222:3001" + "/icoDetails/update/" + $scope.id, $scope.upDate).then(function (result) {
+                console.log(result.data);
+                //alert("修改成功！")
+            })
+            
         }
         //删除
         $scope.delete = function (index) {
@@ -343,6 +375,7 @@ angular.module('controllerModule', [])
         $scope.eventList = [];
         $scope.lastModifyDate = new Date().toUTCString();
         $scope.isDeleted = 0;
+        $scope.lastModifyUser = localStorage.lastModifyUser;
         $scope.createEventList = function () {
             $scope.params = [
                 {
@@ -358,6 +391,7 @@ angular.module('controllerModule', [])
             $http.post("http://106.15.62.222:3001" + "/eventListApi/create", $scope.params).then(function (result) {
                 // $scope.banners.push = $scope.params;
                 console.log(result.data.result);
+                alert("创建成功！")
             })
         }
         $http.get("http://106.15.62.222:3001" + "/eventListApi").then(function (result) {
@@ -383,6 +417,14 @@ angular.module('controllerModule', [])
             $http.post("http://106.15.62.222:3001" + "/eventListApi/update/" + $scope.id, $scope.eventList[index]).then(function (result) {
                 console.log(result.data);
                 alert("修改成功！")
+            })
+            $scope.upDate = {
+                "lastModifyDate": $scope.lastModifyDate,
+                "lastModifyUser": $scope.lastModifyUser
+            }
+            $http.post("http://106.15.62.222:3001" + "/eventListApi/update/" + $scope.id, $scope.upDate).then(function (result) {
+                console.log(result.data);
+                //alert("修改成功！")
             })
         }
         //删除
