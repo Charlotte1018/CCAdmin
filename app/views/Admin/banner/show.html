@@ -22,6 +22,7 @@
                                                 <th>status</th>
                                                 <th>startDate</th>
                                                 <th>endDate</th>
+                                                <!-- <th>isDeleted</th> -->
                                                 <th>edit</th>
                                                 <th>save</th>
                                                 <th>delete</th>
@@ -77,6 +78,10 @@
                                                     <span ng-hide="edits[$index]">{{x.endDate}}</span>
                                                     <input type="text" ng-model="x.endDate" ng-show="edits[$index]">
                                                 </td>
+                                                <!-- <td>
+                                                    <span ng-hide="edits[$index]">{{x.isDeleted}}</span>
+                                                    <input type="text" ng-model="x.isDeleted" ng-show="edits[$index]">
+                                                </td> -->
                                                 
                                                 <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor($index)">编辑</button></td>
                                                 <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save($index)">保存</button></td>

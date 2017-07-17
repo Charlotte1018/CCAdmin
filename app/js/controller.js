@@ -78,7 +78,8 @@ angular.module('controllerModule', [])
                     "startDate": $scope.startDate,
                     "endDate": $scope.endDate,
                     "lastModifyDate": $scope.lastModifyDate,
-                    "lastModifyUser": $scope.lastModifyUser
+                    "lastModifyUser": $scope.lastModifyUser,
+                    "isDeleted": $scope.isDeleted
                 }
             ]
             $http.post("http://106.15.62.222:3001" + "/bannerApi/create", $scope.params).then(function (result) {
@@ -90,6 +91,7 @@ angular.module('controllerModule', [])
         //获取数据
         $http.get("http://106.15.62.222:3001" + "/bannerApi").then(function (result) {
             $scope.banners = result.data;
+            console.log($scope.banners);
         })
         //编辑
         $scope.editor = function (index) {
@@ -100,16 +102,29 @@ angular.module('controllerModule', [])
         $scope.save = function (index) {
             $scope.edits = [];
             $scope.index = index + 1;
+            $scope.id = $scope.banners[index].id;
             console.log($scope.index);
             //console.log($scope.icoLists[index]) //制定项
-            $http.post("http://106.15.62.222:3001" + "/bannerApi/update/" + $scope.index, $scope.banners[index]).then(function (result) {
+            $http.post("http://106.15.62.222:3001" + "/bannerApi/update/" + $scope.id, $scope.banners[index]).then(function (result) {
                 console.log(result.data);
                 alert("修改成功！")
             })
         }
         //删除
         $scope.delete = function (index) {
-            $scope.banners.splice(index, 1)
+            $scope.index = index + 1;
+            $scope.id = $scope.banners[index].id;
+            console.log($scope.id);
+            //$scope.banners.splice(index, 1)
+
+            $http.post("http://106.15.62.222:3001" + "/bannerApi/delete/" + $scope.id).then(function (result) {
+                console.log(result.data);
+                //alert("删除成功！")
+            })
+            $http.get("http://106.15.62.222:3001" + "/bannerApi").then(function (result) {
+                $scope.banners = result.data;
+                console.log($scope.banners);
+            })
         }
 
         //分页
