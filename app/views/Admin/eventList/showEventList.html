@@ -36,19 +36,19 @@
                                                 </td>
                                                 <td>
                                                     <span ng-hide="edits[$index]">{{x.eventName}}</span>
-                                                    <input type="text" ng-model="x.eventName" ng-show="edits[$index]">
+                                                    <input class="editor" type="text" ng-model="x.eventName" ng-show="edits[$index]">
                                                 </td>
                                                 <td>
                                                     <span ng-hide="edits[$index]">{{x.eventDate}}</span>
-                                                    <input type="text" ng-model="x.eventDate" ng-show="edits[$index]">
+                                                    <input style="width:50%" type="text" ng-model="x.eventDate" ng-show="edits[$index]">
                                                 </td>
                                                 <td>
                                                     <span ng-hide="edits[$index]">{{x.eventLocation}}</span>
-                                                    <input type="text" ng-model="x.eventLocation" ng-show="edits[$index]">
+                                                    <input style="width:50%" type="text" ng-model="x.eventLocation" ng-show="edits[$index]">
                                                 </td>
                                                 <td>
                                                     <span ng-hide="edits[$index]">{{x.eventURL}}</span>
-                                                    <input type="text" ng-model="x.eventURL" ng-show="edits[$index]">
+                                                    <input style="width:50%" type="text" ng-model="x.eventURL" ng-show="edits[$index]">
                                                 </td>
                                                 <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor($index)">编辑</button></td>
                                                 <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save($index)">保存</button></td>

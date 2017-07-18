@@ -97,9 +97,12 @@ angular.module('controllerModule', [])
         }
         $scope.isDeleted = 0;
         //console.log($rootScope.Host);
-        $scope.lastModifyDate = new Date().toUTCString();
+        //$scope.lastModifyDate = new Date().toUTCString();
+        var date = new Date();
+        date.setHours(date.getHours()+8);
+        $scope.lastModifyDate = date;
         $scope.lastModifyUser = localStorage.lastModifyUser;
-        console.log($scope.lastModifyUser);
+        console.log($scope.lastModifyDate);
         $scope.createBanner = function () {
             $scope.params = [
                 {
@@ -186,7 +189,10 @@ angular.module('controllerModule', [])
 
     })
     .controller('icoListCtrl', function ($translate, $state, $rootScope, $scope, $http) {
-        $scope.lastModifyDate = new Date().toUTCString();
+        //$scope.lastModifyDate = new Date().toUTCString();
+        var date = new Date();
+        date.setHours(date.getHours()+8);
+        $scope.lastModifyDate = date;
         $scope.lastModifyUser = localStorage.lastModifyUser;
         $scope.selectStatus = {
             "achieved": "0",
@@ -290,7 +296,10 @@ angular.module('controllerModule', [])
     })
     .controller('icoDetailCtrl', function ($translate, $scope, $rootScope, $http, $log) {
         $scope.icoDetails = [];
-        $scope.lastModifyDate = new Date().toUTCString();
+        //$scope.lastModifyDate = new Date().toUTCString();
+        var date = new Date();
+        date.setHours(date.getHours()+8);
+        $scope.lastModifyDate = date;
         $scope.isDeleted = 0;
         $scope.lastModifyUser = localStorage.lastModifyUser;
         $scope.createIcoDetail = function () {
@@ -373,7 +382,10 @@ angular.module('controllerModule', [])
     })
     .controller('eventListCtrl', function ($translate, $scope, $rootScope, $http) {
         $scope.eventList = [];
-        $scope.lastModifyDate = new Date().toUTCString();
+        //$scope.lastModifyDate = new Date().toUTCString();
+        var date = new Date();
+        date.setHours(date.getHours()+8);
+        $scope.lastModifyDate = date;
         $scope.isDeleted = 0;
         $scope.lastModifyUser = localStorage.lastModifyUser;
         $scope.createEventList = function () {
