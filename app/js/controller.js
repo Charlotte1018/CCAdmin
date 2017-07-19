@@ -99,7 +99,7 @@ angular.module('controllerModule', [])
         //console.log($rootScope.Host);
         //$scope.lastModifyDate = new Date().toUTCString();
         var date = new Date();
-        date.setHours(date.getHours()+8);
+        date.setHours(date.getHours() + 8);
         $scope.lastModifyDate = date;
         $scope.lastModifyUser = localStorage.lastModifyUser;
         console.log($scope.lastModifyDate);
@@ -141,7 +141,9 @@ angular.module('controllerModule', [])
         //保存
         $scope.save = function (index) {
             $scope.edits = [];
-
+            var date = new Date();
+            date.setHours(date.getHours() + 8);
+            $scope.lastModifyDate = date;
             $scope.id = $scope.banners[index].id;
             console.log($scope.index);
             //console.log($scope.icoLists[index]) //制定项
@@ -192,7 +194,7 @@ angular.module('controllerModule', [])
     .controller('icoListCtrl', function ($translate, $state, $rootScope, $scope, $http) {
         //$scope.lastModifyDate = new Date().toUTCString();
         var date = new Date();
-        date.setHours(date.getHours()+8);
+        date.setHours(date.getHours() + 8);
         $scope.lastModifyDate = date;
         $scope.lastModifyUser = localStorage.lastModifyUser;
         $scope.selectStatus = {
@@ -299,7 +301,7 @@ angular.module('controllerModule', [])
         $scope.icoDetails = [];
         //$scope.lastModifyDate = new Date().toUTCString();
         var date = new Date();
-        date.setHours(date.getHours()+8);
+        date.setHours(date.getHours() + 8);
         $scope.lastModifyDate = date;
         $scope.isDeleted = 0;
         $scope.lastModifyUser = localStorage.lastModifyUser;
@@ -356,7 +358,7 @@ angular.module('controllerModule', [])
                 console.log(result.data);
                 //alert("修改成功！")
             })
-            
+
         }
         //删除
         $scope.delete = function (index) {
@@ -385,7 +387,7 @@ angular.module('controllerModule', [])
         $scope.eventList = [];
         //$scope.lastModifyDate = new Date().toUTCString();
         var date = new Date();
-        date.setHours(date.getHours()+8);
+        date.setHours(date.getHours() + 8);
         $scope.lastModifyDate = date;
         $scope.isDeleted = 0;
         $scope.lastModifyUser = localStorage.lastModifyUser;
