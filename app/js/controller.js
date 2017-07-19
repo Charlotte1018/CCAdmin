@@ -120,7 +120,8 @@ angular.module('controllerModule', [])
             console.log($scope.params);
             $http.post("http://106.15.62.222:3001" + "/bannerApi/create", $scope.params).then(function (result) {
                 console.log(result.data);
-                console.log(result.data.result[0].lastModifyDate);
+                alert("创建成功！")
+                //console.log(result.data.result[0].lastModifyDate);
 
             })
             // alert("创建成功！")
