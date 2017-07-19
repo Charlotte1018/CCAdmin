@@ -210,7 +210,7 @@ angular.module('controllerModule', [])
         $scope.isDeleted = 0;
         $scope.createIcoList = function () {
             if (confirm("您是否确定提交本页？")) {
-                alert("提交并填写详情页");
+                //alert("提交并填写详情页");
                 $scope.params = [
                     {
                         "logoPath": $scope.logoPath,
@@ -228,8 +228,10 @@ angular.module('controllerModule', [])
                 $http.post("http://106.15.62.222:3001" + "/icoListApi/create", $scope.params).then(function (result) {
                     // $scope.banners.push = $scope.params;
                     console.log(result.data.result);
+                    alert("您创建的ICOID号为："+result.data.result[0].id+",填写详情页");
+                    $state.go("CCAdmin.createIcoDetails");
                 })
-                $state.go("CCAdmin.createIcoDetails");
+                //$state.go("CCAdmin.createIcoDetails");
             }
             else {
                 alert("重新检查信息");
