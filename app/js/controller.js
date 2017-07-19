@@ -84,7 +84,7 @@ angular.module('controllerModule', [])
         };
 
     })
-    .controller('bannerCtrl', function ($translate, $scope, $rootScope, $http) {
+    .controller('bannerCtrl', function ($translate, $scope, $rootScope, $http, $state, $interval) {
         $scope.banners = [];
         $scope.selectLocation = {
             "top": "0",
@@ -121,6 +121,7 @@ angular.module('controllerModule', [])
             $http.post("http://106.15.62.222:3001" + "/bannerApi/create", $scope.params).then(function (result) {
                 console.log(result.data);
                 alert("创建成功！")
+                $state.go("CCAdmin.showBanner");
                 //console.log(result.data.result[0].lastModifyDate);
 
             })
@@ -249,6 +250,9 @@ angular.module('controllerModule', [])
         //保存
         $scope.save = function (index) {
             $scope.edits = [];
+            var date = new Date();
+            date.setHours(date.getHours() + 8);
+            $scope.lastModifyDate = date;
             $scope.id = $scope.icoLists[index].id;
             console.log($scope.id);
             //console.log($scope.icoLists[index]) //制定项
@@ -297,7 +301,7 @@ angular.module('controllerModule', [])
         $scope.bigCurrentPage = 1;
         $scope.numPages = 70;
     })
-    .controller('icoDetailCtrl', function ($translate, $scope, $rootScope, $http, $log) {
+    .controller('icoDetailCtrl', function ($translate, $scope, $rootScope, $http, $log, $state) {
         $scope.icoDetails = [];
         //$scope.lastModifyDate = new Date().toUTCString();
         var date = new Date();
@@ -344,6 +348,9 @@ angular.module('controllerModule', [])
         $scope.save = function (index) {
             $scope.edits = [];
             $scope.id = $scope.icoDetails[index].id;
+            var date = new Date();
+            date.setHours(date.getHours() + 8);
+            $scope.lastModifyDate = date;
             console.log($scope.id);
             //console.log($scope.icoLists[index]) //制定项
             $http.post("http://106.15.62.222:3001" + "/icoDetails/update/" + $scope.id, $scope.icoDetails[index]).then(function (result) {
@@ -383,7 +390,7 @@ angular.module('controllerModule', [])
         $scope.bigCurrentPage = 1;
         $scope.numPages = 70;
     })
-    .controller('eventListCtrl', function ($translate, $scope, $rootScope, $http) {
+    .controller('eventListCtrl', function ($translate, $scope, $rootScope, $http, $state) {
         $scope.eventList = [];
         //$scope.lastModifyDate = new Date().toUTCString();
         var date = new Date();
@@ -407,6 +414,7 @@ angular.module('controllerModule', [])
                 // $scope.banners.push = $scope.params;
                 console.log(result.data.result);
                 alert("创建成功！")
+                $state.go("CCAdmin.showEventList");
             })
         }
         $http.get("http://106.15.62.222:3001" + "/eventListApi").then(function (result) {
@@ -426,6 +434,9 @@ angular.module('controllerModule', [])
         //保存
         $scope.save = function (index) {
             $scope.edits = [];
+            var date = new Date();
+            date.setHours(date.getHours() + 8);
+            $scope.lastModifyDate = date;
             $scope.id = $scope.eventList[index].id;
             console.log($scope.id);
             console.log($scope.eventList[index]) //制定项
