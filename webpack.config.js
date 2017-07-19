@@ -12,8 +12,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: './app/views/**/*',
-        from: './app/images/**',
-        from: './app/frame/**'
+        from: './app/images/**'
      }
     ]),
     new htmlWebpackPlugin({
