@@ -199,7 +199,7 @@ angular.module('controllerModule', [])
         $scope.lastModifyDate = date;
         $scope.lastModifyUser = localStorage.lastModifyUser;
         $scope.selectStatus = {
-            "achieved": "0",
+            "archived": "0",
             "upcomming": "1",
             "live": "2"
         }
@@ -508,19 +508,31 @@ angular.module('controllerModule', [])
     })
     .controller('articleEditor', ['$scope', 'textAngularManager', function articleEditor($scope, textAngularManager, $http) {
         $scope.htmlcontent = "<p>在此编辑你的文章!</p>";
+        var date = new Date();
+        date.setHours(date.getHours() + 8);
+        $scope.lastModifyDate = date;
+        $scope.isDeleted = 0;
+        $scope.lastModifyUser = localStorage.lastModifyUser;
+        $scope.selectStatus = {
+            "archived": "0",
+            "upcomming": "1",
+            "live": "2",
+            "dash": "3"
+        }
         $scope.createArticle = function () {
             $scope.params = [
                 {
                     "title": $scope.title,
                     "author": $scope.author,
                     "time": $scope.time,
+                    "status": $scope.status,
                     "htmlcontent": $scope.htmlcontent,
                     "lastModifyDate": $scope.lastModifyDate,
                     "lastModifyUser": $scope.lastModifyUser
                 }
             ]
-            $http.post("http://106.15.62.222:3001" + "/eventListApi/create", $scope.params).then(function (result) {
-                console.log(result);
-            })
+            // $http.post("http://106.15.62.222:3001" + "/eventListApi/create", $scope.params).then(function (result) {
+            //     console.log(result);
+            // })
         }
     }]);

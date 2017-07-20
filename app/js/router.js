@@ -107,7 +107,25 @@ angular.module('routerModule', [
                 url: '/articleEditor',
                 views: {
                     "content": {
-                        templateUrl: 'app/views/Admin/articles/article.html',
+                        templateUrl: 'app/views/Admin/articles/articleEditor.html',
+                        controller: 'articleEditor'
+                    }
+                }
+            })
+            .state('CCAdmin.articleList', {
+                url: '/articleList',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/articles/articleList.html',
+                        controller: 'articleEditor'
+                    }
+                }
+            })
+            .state('CCAdmin.articleModify', {
+                url: '/articleModify',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/articles/articleModify.html',
                         controller: 'articleEditor'
                     }
                 }
