@@ -228,7 +228,7 @@ angular.module('controllerModule', [])
                 $http.post("http://106.15.62.222:3001" + "/icoListApi/create", $scope.params).then(function (result) {
                     // $scope.banners.push = $scope.params;
                     console.log(result.data.result);
-                    alert("您创建的ICOID号为："+result.data.result[0].id+",填写详情页");
+                    alert("您创建的ICOID号为：" + result.data.result[0].id + ",填写详情页");
                     $state.go("CCAdmin.createIcoDetails");
                 })
                 //$state.go("CCAdmin.createIcoDetails");
@@ -242,7 +242,7 @@ angular.module('controllerModule', [])
         //获取数据
         $http.get("http://106.15.62.222:3001" + "/icoListApi").then(function (result) {
             $scope.icoLists = result.data;
-            console.log($scope.icoLists)
+            //console.log($scope.icoLists)
         })
         //编辑
         $scope.editor = function (index) {
@@ -287,8 +287,35 @@ angular.module('controllerModule', [])
             })
 
         }
-
-
+        $scope.details = function (index) {
+            localStorage.id = $scope.icoLists[index].id;
+            localStorage.logoPath = $scope.icoLists[index].logoPath;
+            localStorage.icoName = $scope.icoLists[index].icoName;
+            localStorage.status = $scope.icoLists[index].status;
+            localStorage.isRecommended = $scope.icoLists[index].isRecommended;
+            localStorage.startDate = $scope.icoLists[index].startDate;
+            localStorage.endDate = $scope.icoLists[index].endDate;
+            localStorage.description = $scope.icoLists[index].description;
+            $scope.logo = localStorage.id;
+            $scope.name = localStorage.icoName;
+            $scope.sta = localStorage.status;
+            $scope.recommend = localStorage.isRecommended;
+            $scope.start = localStorage.startDate;
+            $scope.end = localStorage.endDate;
+            $scope.desc = localStorage.description;
+            // console.log(localStorage.description);
+            // console.log($scope.desc)
+            $state.go("CCAdmin.icoDetails");
+        }
+        $scope.logo = localStorage.logoPath;
+        $scope.name = localStorage.icoName;
+        $scope.sta = localStorage.status;
+        $scope.recommend = localStorage.isRecommended;
+        $scope.start = localStorage.startDate;
+        $scope.end = localStorage.endDate;
+        $scope.desc = localStorage.description;
+        // console.log($scope.desc)
+        // console.log(localStorage.description);
 
         //分页
         // $scope.totalItems = 64;

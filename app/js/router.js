@@ -58,6 +58,15 @@ angular.module('routerModule', [
                     }
                 }
             })
+            .state('CCAdmin.icoDetails', {
+                url: '/icoDetails',
+                views: {
+                    "content": {
+                        templateUrl: 'app/views/Admin/icoList/icoDetails.html',
+                        controller: 'icoListCtrl'
+                    }
+                }
+            })
             .state('CCAdmin.createIcoDetails', {
                 url: '/createIcoDetails',
                 views: {

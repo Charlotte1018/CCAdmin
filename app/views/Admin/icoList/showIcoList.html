@@ -26,6 +26,7 @@
                                         <th>edit</th>
                                         <th>save</th>
                                         <th>delete</th>
+                                        <th>details</th>
                                         <!-- <th>lastModifyDate</th>
                                                     <th>lastModifyUser</th> -->
 
@@ -38,35 +39,36 @@
                                         </td>
                                         <td>
                                             <span ng-hide="edits[$index]">{{x.logoPath}}</span>
-                                            <input class="editor" type="text" ng-model="x.logoPath" ng-show="edits[$index]">
+                                            <input style="width:80%"type="text" ng-model="x.logoPath" ng-show="edits[$index]">
                                         </td>
                                         <td>
                                             <span ng-hide="edits[$index]">{{x.icoName}}</span>
-                                            <input class="editor" type="text" ng-model="x.icoName" ng-show="edits[$index]">
+                                            <input style="width:80%" type="text" ng-model="x.icoName" ng-show="edits[$index]">
                                         </td>
                                         <td>
                                             <span ng-hide="edits[$index]">{{x.status}}</span>
-                                            <input class="editor" type="text" ng-model="x.status" ng-show="edits[$index]">
+                                            <input style="width:80%" type="text" ng-model="x.status" ng-show="edits[$index]">
                                         </td>
                                         <td>
                                             <span ng-hide="edits[$index]">{{x.isRecommended}}</span>
-                                            <input class="editor" type="text" ng-model="x.isRecommended" ng-show="edits[$index]">
+                                            <input style="width:80%" type="text" ng-model="x.isRecommended" ng-show="edits[$index]">
                                         </td>
                                         <td>
-                                            <span ng-hide="edits[$index]">{{x.startDate}}</span>
-                                            <input style="width:50%"  type="text" ng-model="x.startDate" ng-show="edits[$index]">
+                                            <span ng-hide="edits[$index]">{{x.startDate|date:"short"}}</span>
+                                            <input style="width:80%"  type="text" ng-model="x.startDate" date-format ng-show="edits[$index]">
                                         </td>
                                         <td>
-                                            <span ng-hide="edits[$index]">{{x.endDate}}</span>
-                                            <input style="width:50%" type="text" ng-model="x.endDate" ng-show="edits[$index]">
+                                            <span ng-hide="edits[$index]">{{x.endDate|date:"short"}}</span>
+                                            <input style="width:80%" type="text" ng-model="x.endDate" ng-show="edits[$index]">
                                         </td>
                                         <td>
                                             <span ng-hide="edits[$index]">{{x.description}}</span>
-                                            <input style="width:50%" type="text" ng-model="x.description" ng-show="edits[$index]">
+                                            <input style="width:80%" type="text" ng-model="x.description" ng-show="edits[$index]">
                                         </td>
                                         <td class="hidden-phone"><button class="btn btn-success btn-xs" ng-click="editor($index)">编辑</button></td>
                                         <td class="hidden-phone"><button class="btn btn-warning btn-xs" ng-click="save($index)">保存</button></td>
                                         <td class="hidden-phone"><button class="btn btn-danger btn-xs" ng-click="delete($index)">删除</button></td>
+                                        <td class="hidden-phone"><button class="btn btn-info btn-xs" ng-click="details($index)">详情 </button></td>
                                 </tbody>
                             </table>
                             <div style="text-align:center;">
